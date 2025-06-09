@@ -1,0 +1,273 @@
+/* FightPredictor.css */
+
+/* ==========
+   Variables
+   ========== */
+:root {
+  --red: #e82f94;
+  --blue: #3b44ff;
+  --bg: #f8f8f8;
+  --card-bg: #ffffff;
+  --text: #3b4148;
+  --stat-bg: #f7f7f7;
+  --yellow: #f9d423;
+  --orange: #ff4e50;
+  --shadow: rgba(0, 0, 0, 0.05);
+}
+
+body {
+  font-family: sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* ========
+   Header
+   ======== */
+   
+.header {
+  background: linear-gradient(90deg, var(--red), var(--blue));
+  color: white;
+  padding: 1rem 0;
+  border-radius: 0 0 0.5rem 0.5rem;
+  text-align: center;
+}
+.header-icon {
+  font-size: 1.5rem;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+.header-content h1 {
+  display: inline-block;
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+}
+
+/* ====================
+   Red & Blue Corners
+   ==================== */
+.corners {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.corner {
+  background: var(--card-bg);
+  border: 2px solid;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  width: 100%;
+  max-width: 380px;
+}
+.corner.red   { border-color: var(--red); }
+.corner.blue  { border-color: var(--blue); }
+
+.corner h2 {
+  text-transform: uppercase;
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: currentColor;
+}
+
+.corner.red   h2 { color: var(--red); }
+.corner.blue  h2 { color: var(--blue); }
+
+.corner input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.fighter-name {
+  text-align: center;
+  margin: 0.25rem 0 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: currentColor;
+}
+
+/* Grid of stat cards */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+.stat-card {
+  background: var(--stat-bg);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  box-shadow: 0 2px 6px var(--shadow);
+}
+.stat-value {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+.stat-label {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* ======
+   VS Circle
+   ====== */
+.vs-circle {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, var(--red), var(--blue));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-top: 2rem;
+}
+
+/* ==============
+   Fight Details
+   ============== */
+.fight-details {
+  background: var(--card-bg);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+}
+.field label {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+.field select {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+}
+
+/* toggle switch */
+.toggle-field {
+  display: flex;      /* overrides .field's flex-direction */
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #ccc;
+  border-radius: 20px;
+  transition: background-color 0.2s;
+}
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  top: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+.toggle input:checked + .slider {
+  background-color: var(--blue);
+}
+.toggle input:checked + .slider::before {
+  transform: translateX(20px);
+}
+
+/* ======================
+   Predict Winner Button
+   ====================== */
+.predict-btn {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: linear-gradient(90deg, var(--red), var(--blue));
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 3px 6px var(--shadow);
+  cursor: pointer;
+}
+.predict-btn:hover {
+  opacity: 0.95;
+}
+
+/* =========
+   Result
+   ========= */
+.result {
+  margin-top: 2rem;
+}
+.winner-card {
+  background: linear-gradient(90deg, var(--yellow), var(--orange));
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+  color: #3b1414;
+  box-shadow: 0 3px 6px var(--shadow);
+}
+.winner-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.winner-card p {
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+/* bottom probabilities */
+.probabilities {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.prob {
+  padding: 0.75rem;
+  border: 2px solid;
+  border-radius: 0.5rem;
+  text-align: center;
+  font-weight: bold;
+}
+.red-outline  { border-color: var(--red);  color: var(--red); }
+.blue-outline { border-color: var(--blue); color: var(--blue); }
+
+.select-fighter {
+    width: 100%;
+}
