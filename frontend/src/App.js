@@ -34,7 +34,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login_page setLoggedIn={setLoggedIn} />} />
         <Route path="/register" element={<Register_page />} />
-        <Route path="/predictor" element={<Predictor />} />
+        <Route path="/predictor" element={<Predictor LoggedIn={LoggedIn} />} />
         <Route path="/results" element={<Results />} />
         <Route path="/account_info" element={<Account_info/>} />
       </Routes>

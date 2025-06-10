@@ -15,7 +15,7 @@ export default function Login_page({setLoggedIn}) {
         const formBody = new URLSearchParams({
             username: username.current.value,
             password: password.current.value,
-        }).toString(); // "username=alice&password=secret"
+        }).toString();
 
         const response = await fetch('http://127.0.0.1:5000/login', {
         method: 'POST',

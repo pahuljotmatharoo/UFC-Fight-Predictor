@@ -1,10 +1,21 @@
 /* FightPredictor.css */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap');
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
 /* ==========
    Variables
    ========== */
 :root {
-  --red: #e82f94;
+  --red: #ff0000;
   --blue: #3b44ff;
   --bg: #f8f8f8;
   --card-bg: #ffffff;
@@ -15,15 +26,14 @@
   --shadow: rgba(0, 0, 0, 0.05);
 }
 
-body {
-  font-family: sans-serif;
-  background: var(--bg);
-  color: var(--text);
-}
-.container {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+.predictor-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  min-height: 100vh;
+  animation: fadeIn 1s;
 }
 
 /* ========
@@ -53,19 +63,19 @@ body {
    ==================== */
 .corners {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 5rem;
   margin-top: 2rem;
+  margin-bottom: 2rem;
+  align-items: center;
 }
 
 .corner {
   background: var(--card-bg);
-  border: 2px solid;
+  border: 4px solid;
   border-radius: 0.5rem;
-  padding: 1rem;
+  padding: 2rem;
   width: 100%;
-  max-width: 380px;
 }
 .corner.red   { border-color: var(--red); }
 .corner.blue  { border-color: var(--blue); }
@@ -91,7 +101,6 @@ body {
 
 .fighter-name {
   text-align: center;
-  margin: 0.25rem 0 1rem;
   font-size: 1.5rem;
   font-weight: bold;
   color: currentColor;
@@ -124,8 +133,7 @@ body {
    VS Circle
    ====== */
 .vs-circle {
-  flex-shrink: 0;
-  width: 60px;
+  width: 170px;
   height: 60px;
   border-radius: 50%;
   background: linear-gradient(90deg, var(--red), var(--blue));
@@ -211,6 +219,7 @@ body {
 /* ======================
    Predict Winner Button
    ====================== */
+
 .predict-btn {
   width: 100%;
   padding: 1rem;
@@ -270,4 +279,8 @@ body {
 
 .select-fighter {
     width: 100%;
+}
+
+.predictor-title{
+  color:#ffffff;
 }

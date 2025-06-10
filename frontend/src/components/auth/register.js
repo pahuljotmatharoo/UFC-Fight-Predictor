@@ -31,6 +31,7 @@ export default function Register_page() {
             navigate("/");
         }
     }
+    
     return(
         <div className='login-page'>
             <Login>
