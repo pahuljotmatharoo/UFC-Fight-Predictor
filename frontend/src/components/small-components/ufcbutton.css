@@ -1,0 +1,58 @@
+/* UfcButton.css */
+
+.ufc-button {
+  position: relative;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    #0e1e5a 0%,
+    #1e3a8a 60%,
+    #3369c1 100%
+  );
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  /* added subtle white glow + original dark shadow */
+  box-shadow:
+    0 0 8px rgba(255, 255, 255, 0.2),
+    0 4px 8px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+.ufc-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(45deg) translate(-100%, -100%);
+  transition: transform 0.6s ease;
+}
+
+.ufc-button:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 0 12px rgba(255, 255, 255, 0.25),
+    0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.ufc-button:hover::before {
+  transform: rotate(45deg) translate(100%, 100%);
+}
+
+.ufc-button:active {
+  transform: scale(0.95);
+  box-shadow:
+    0 0 6px rgba(255, 255, 255, 0.15),
+    0 2px 4px rgba(0, 0, 0, 0.6);
+}

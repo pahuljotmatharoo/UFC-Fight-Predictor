@@ -1,7 +1,7 @@
 import { useEffect, useState , useRef } from 'react';
 import './predictor.css'
 import { useNavigate } from 'react-router-dom';
-import Button from '../small-components/button';
+import UfcButton from '../small-components/ufcbutton';
 
 // useeffect basically just either runs on every render of the site, or when the variable that we call the effect on changes.
 
@@ -202,9 +202,9 @@ export default function Predictor({LoggedIn}) {
         </section>
 
         {/* Predict Button */}
-        <Button click={() => fight_predict(Fighter1,Fighter2,LoggedIn, SetData)}>
+        <UfcButton click={() => fight_predict(Fighter1,Fighter2,LoggedIn, SetData)}>
           {"⚡ Predict Winner"}
-        </Button>      
+          </UfcButton>      
         {/* Result */}
         <section className="result">
           <div className="winner-card">
@@ -214,10 +214,10 @@ export default function Predictor({LoggedIn}) {
             </p>
             <div className="probabilities">
             <div className="prob red-outline">
-              {Fighter1 == Data.Winner ? Fighter1 : Fighter2 }: {Math.round(Data.percentage_winner * 100 * 100) / 100}%
+              {Fighter1 === Data.Winner ? Fighter1 : Fighter2 }: {Math.round(Data.percentage_winner * 100 * 100) / 100}%
             </div>
             <div className="prob blue-outline">
-              {Fighter1 == Data.Winner ? Fighter2 : Fighter1 }: {Math.round(Data.percentage_loser * 100 * 100) / 100}%
+              {Fighter1 === Data.Winner ? Fighter2 : Fighter1 }: {Math.round(Data.percentage_loser * 100 * 100) / 100}%
             </div>
           </div>
           </div>

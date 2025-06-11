@@ -1,0 +1,13 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+.results-page {
+    display: flex;
+    animation: fadeIn 1s;
+    min-height: 100vh;
+}

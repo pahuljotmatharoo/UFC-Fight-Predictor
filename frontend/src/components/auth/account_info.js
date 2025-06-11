@@ -1,6 +1,7 @@
 import './account.css'
 import { useEffect, useState } from 'react';
 import user_stock from '../../assets/user.png'
+import UfcButton from '../small-components/ufcbutton';
 
 export default function Account_info(LoggedIn) {
     const [Info, setInfo] = useState({});
@@ -27,9 +28,9 @@ export default function Account_info(LoggedIn) {
             </div>
             </div>
             <div className="account-info-buttons">
-                <button>Chnage Username</button>
-                <button>Change Password</button>
-                <button>Delete Account</button>
+                <UfcButton>Change Username</UfcButton>
+                <UfcButton>Change Password</UfcButton>
+                <UfcButton>Delete Account</UfcButton>
                 </div>
         </div>
     );

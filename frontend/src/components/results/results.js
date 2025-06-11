@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import './results.css'
 
 export default function Results(LoggedIn) {
   const [Data, setData] = useState([]);
@@ -20,10 +21,11 @@ export default function Results(LoggedIn) {
   }
 
   useEffect(() => {
-     var call = get_record();
+     get_record();
   },[LoggedIn]);
 
   return (
+    <div className='results-page'>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -53,5 +55,6 @@ export default function Results(LoggedIn) {
         </TableBody>
       </Table>
     </TableContainer>
+    </div>
   );
 }
