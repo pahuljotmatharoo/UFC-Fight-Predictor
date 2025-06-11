@@ -1,0 +1,30 @@
+.account-info-page {
+  display: flex;
+  flex-direction: column;   
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: #fff;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+}
+
+.account-info-buttons {
+  display: flex;
+  flex-direction: column;      /* ← stack children top-to-bottom */
+  color: #fff;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+}
+.image-info {
+  display: flex;
+  flex-direction: row;      /* default, you can omit */
+  align-items: center;      /* vertically center img + text */
+  gap: 1rem;                /* space between them */
+  margin-bottom: 2rem;      /* space down to the buttons */
+}
+
+.info {
+  display: flex;
+  flex-direction: column;   
+}

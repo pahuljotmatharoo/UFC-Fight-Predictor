@@ -36,7 +36,7 @@ function App() {
         <Route path="/register" element={<Register_page />} />
         <Route path="/predictor" element={<Predictor LoggedIn={LoggedIn} />} />
         <Route path="/results" element={<Results LoggedIn={LoggedIn} />} />
-        <Route path="/account_info" element={<Account_info/>} />
+        <Route path="/account_info" element={<Account_info LoggedIn={LoggedIn}/>} />
       </Routes>
     </Router>
     </div>

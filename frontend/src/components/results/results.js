@@ -21,7 +21,7 @@ export default function Results(LoggedIn) {
 
   useEffect(() => {
      var call = get_record();
-  })
+  },[LoggedIn]);
 
   return (
     <TableContainer component={Paper}>

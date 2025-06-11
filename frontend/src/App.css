@@ -83,14 +83,4 @@
   --login-bg: #21325e !important;
 }
 
-.account-info-page {
-  display: flex;
-  flex-direction: column;      /* ← stack children top-to-bottom */
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  color: #fff;
-  animation-name: fadeIn;
-  animation-duration: 1s;
-}
 
