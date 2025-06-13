@@ -2,9 +2,11 @@ import './account.css'
 import { useEffect, useState } from 'react';
 import user_stock from '../../assets/user.png'
 import UfcButton from '../small-components/ufcbutton';
+import { useNavigate } from 'react-router-dom';
 
 export default function Account_info(LoggedIn) {
     const [Info, setInfo] = useState({});
+    const navigate = useNavigate();
     var tries = 0;
     const get_account_info = async () => {
         const response = await fetch(`http://127.0.0.1:5000/account/${LoggedIn.LoggedIn}`, {
@@ -13,9 +15,29 @@ export default function Account_info(LoggedIn) {
         var result = await response.json();
         setInfo(result);
     }
+    
     useEffect(() => {
         get_account_info();
     }, [LoggedIn]);
+
+    const navigate_user = async() => {
+        navigate("/change_username")
+    }
+    const navigate_pass = async() => {
+        navigate("/change_password")
+    }
+    const delete_acc = async() => {
+        const response = await fetch(`http://127.0.0.1:5000/account/delete/${LoggedIn.LoggedIn}`, {
+        method: 'DELETE',
+        });
+        if(response.status === 200) {
+            alert("Account Deleted!");
+            navigate("/");
+        }
+        else {
+            alert("Something went wrong");
+        }
+    }
 
     return(
         <div className="account-info-page">
@@ -28,9 +50,9 @@ export default function Account_info(LoggedIn) {
             </div>
             </div>
             <div className="account-info-buttons">
-                <UfcButton>Change Username</UfcButton>
-                <UfcButton>Change Password</UfcButton>
-                <UfcButton>Delete Account</UfcButton>
+                <UfcButton click={navigate_user}>Change Username</UfcButton>
+                <UfcButton click={navigate_pass}>Change Password</UfcButton>
+                <UfcButton click={delete_acc}>Delete Account</UfcButton>
                 </div>
         </div>
     );
