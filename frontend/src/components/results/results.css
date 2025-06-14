@@ -6,8 +6,44 @@
     opacity: 100%;
   }
 }
+
 .results-page {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.results-components {
     display: flex;
+    flex-direction: column;
     animation: fadeIn 1s;
-    min-height: 100vh;
+    /* palette */
+  --ufc-red:    #E22424;
+  --ufc-blue:   #3979F1;
+  --bg-dark:    rgba(10, 15, 38, 0.6);    /* make it semi-transparent */
+  --overlay:    rgba(0,0,0,0.6);
+  --text-light: #FFFFFF;
+  --stat-bg:    rgba(255,255,255,0.1);
+  --shadow:     rgba(0,0,0,0.5);
+
+  /* layout & font */
+  border-radius: 100px;
+  width: 70%;
+  animation: fadeIn 1s;
+
+  /* blur the content behind this box */
+  background: var(--bg-dark);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);  /* Safari support */
+  box-shadow: 0 4px 20px var(--shadow);
+}
+
+.results-components h1 {
+  text-align: center;
+  color: #FFFFFF;
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }

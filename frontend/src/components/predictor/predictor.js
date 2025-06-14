@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import UfcButton from '../small-components/ufcbutton';
 import LoadingDots from '../small-components/loading';
 import LoadingDots_Blue from '../small-components/loading_blue';
+import Result_card from '../results/result-card';
 
 // useeffect basically just either runs on every render of the site, or when the variable that we call the effect on changes.
 

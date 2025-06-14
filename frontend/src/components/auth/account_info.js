@@ -4,12 +4,13 @@ import user_stock from '../../assets/user.png'
 import UfcButton from '../small-components/ufcbutton';
 import { useNavigate } from 'react-router-dom';
 
-export default function Account_info(LoggedIn) {
+export default function Account_info({ LoggedIn, setLoggedIn }) {
+    console.log(LoggedIn);
     const [Info, setInfo] = useState({});
     const navigate = useNavigate();
     var tries = 0;
     const get_account_info = async () => {
-        const response = await fetch(`http://127.0.0.1:5000/account/${LoggedIn.LoggedIn}`, {
+        const response = await fetch(`http://127.0.0.1:5000/account/${LoggedIn}`, {
         method: 'GET',
         });
         var result = await response.json();
@@ -27,11 +28,12 @@ export default function Account_info(LoggedIn) {
         navigate("/change_password")
     }
     const delete_acc = async() => {
-        const response = await fetch(`http://127.0.0.1:5000/account/delete/${LoggedIn.LoggedIn}`, {
+        const response = await fetch(`http://127.0.0.1:5000/account/delete/${LoggedIn}`, {
         method: 'DELETE',
         });
         if(response.status === 200) {
             alert("Account Deleted!");
+            setLoggedIn(0);
             navigate("/");
         }
         else {

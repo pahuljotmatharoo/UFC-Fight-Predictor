@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import Result_card from './result-card';
 import './results.css'
 
 export default function Results(LoggedIn) {
@@ -18,6 +19,7 @@ export default function Results(LoggedIn) {
     })
     var data = await response.json();
     setData(data.result);
+    console.log(data);
   }
 
   useEffect(() => {
@@ -26,35 +28,16 @@ export default function Results(LoggedIn) {
 
   return (
     <div className='results-page'>
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Fighter 1 (RED)</TableCell>
-            <TableCell align="left">Fighter 2 (BLUE)</TableCell>
-            <TableCell align="left">Percentage 1 (RED)</TableCell>
-            <TableCell align="left">Percentage 2 (BLUE)</TableCell>
-            <TableCell align="left">Winner</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {Data.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.Fighter1}
-              </TableCell>
-              <TableCell align="left">{row.Fighter2}</TableCell>
-              <TableCell align="left">{row.Percentage1}</TableCell>
-              <TableCell align="left">{row.Percentage2}</TableCell>
-              <TableCell align="left">{row.Winner}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+      <div className='results-components'>
+        <h1>Fight Results</h1>
+        {Data.map((fight) =>
+        <Result_card fighter1={fight.Fighter1}
+          fighter2={fight.Fighter2}
+          percentage1={fight.Percentage1}
+          percentage2={fight.Percentage2}
+          winner={fight.Winner}></Result_card>
+        )}
+      </div>
     </div>
   );
 }
