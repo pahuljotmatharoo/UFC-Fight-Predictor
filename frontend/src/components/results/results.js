@@ -9,21 +9,36 @@ import Paper from '@mui/material/Paper';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Result_card from './result-card';
+import { useNavigate } from 'react-router-dom';
 import './results.css'
 
-export default function Results(LoggedIn) {
+export default function Results({LoggedIn}) {
+  const navigate = useNavigate();
+  var load = false;
+  var function_call = false;
+  console.log(LoggedIn);
+  useEffect(() => {
+    if(LoggedIn === 0 && !load) {
+    alert("Not Logged in!");
+    load = true;
+    navigate("/");
+  }}
+) 
+
   const [Data, setData] = useState([]);
   const get_record = async() => {
-    const response = await fetch(`http://127.0.0.1:5000/results/${LoggedIn.LoggedIn}`, {
+    const response = await fetch(`http://127.0.0.1:5000/results/${LoggedIn}`, {
       method: 'GET',
     })
     var data = await response.json();
     setData(data.result);
-    console.log(data);
   }
 
   useEffect(() => {
-     get_record();
+    if(!function_call) {
+    get_record();
+    function_call = true;
+    }
   },[LoggedIn]);
 
   return (

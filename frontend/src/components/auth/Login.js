@@ -31,6 +31,14 @@ export default function Login_page({setLoggedIn}) {
             setLoggedIn(data.accountID);
             navigate("/predictor");
         }
+        else if(response.status === 401) {
+            alert("Incorrect Password!");
+            return;
+        }
+        else if(response.status === 404) {
+            alert("Account not found! Please register");
+            return;
+        }
     }
 
     return(

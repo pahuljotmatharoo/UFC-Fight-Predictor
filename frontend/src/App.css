@@ -40,13 +40,14 @@
 /* Navbar styling */
 /* Navbar Container */
 .navbar {
-  position: sticky;
+  position: relative;               /* so .brand can be absolutely positioned */
+  display: flex;
+  justify-content: center;          /* centers your UL exactly in the middle */
+  align-items: center;
   top: 0;
   width: 100%;
   background-color: #0D1B2A; /* Matches background, just a bit darker */
   padding: 0.75rem 0;
-  display: flex;
-  justify-content: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 1000;
 }
@@ -54,6 +55,8 @@
 /* Nav Items Container */
 .nav-links {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 2rem;
   list-style: none;
   margin: 0;
@@ -104,4 +107,12 @@
   --login-bg: #21325e !important;
 }
 
+.brand {
+  position: absolute;
+  left: 1rem;
+}
 
+.user {
+  position: absolute;
+  right: 1rem;
+}
