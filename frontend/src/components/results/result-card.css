@@ -1,5 +1,5 @@
 .result-card {
-  width: 1000px;
+  width: 60%;
   margin: 40px auto;
   max-height: 200px;
   background: #0c1028;
@@ -17,6 +17,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 15px;
 }
 
 .card {
@@ -74,11 +75,19 @@
 }
 
 .vs {
-  margin: 0 16px;
-  font-size: 14px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.25rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #888;
+  color: var(--text-light);
+  background: linear-gradient(135deg, var(--ufc-red), var(--ufc-blue));
+  width: 60px;
+  height: 60px;
+  clip-path: polygon(30% 0%,70% 0%,100% 50%,70% 100%,30% 100%,0% 50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px var(--shadow);
+  flex-shrink: 0;
 }
 
 .result-bottom {

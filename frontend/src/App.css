@@ -38,30 +38,51 @@
 }
 
 /* Navbar styling */
+/* Navbar Container */
 .navbar {
-  position: top;
+  position: sticky;
   top: 0;
-  background-color: #21325e;
-  padding: 0.5rem;
+  width: 100%;
+  background-color: #0D1B2A; /* Matches background, just a bit darker */
+  padding: 0.75rem 0;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 1000;
 }
 
+/* Nav Items Container */
 .nav-links {
   display: flex;
-  justify-content: space-around;
+  gap: 2rem;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
+/* Nav Links */
 .nav-links a {
-  color: #fff;
+  color: #ffffff;
   text-decoration: none;
-  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
 }
 
+/* Hover Effect */
 .nav-links a:hover {
-  background-color: #f0e18f;
-  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #f0e18f;
 }
+
+/* Optional active class */
+.nav-links a.active {
+  color: #E10600;
+  border-bottom: 2px solid #E10600;
+}
+
 
 .landing-page {
   background-color: #21325e;

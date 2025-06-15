@@ -4,12 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import UfcButton from '../small-components/ufcbutton';
 import LoadingDots from '../small-components/loading';
 import LoadingDots_Blue from '../small-components/loading_blue';
-import Result_card from '../results/result-card';
+import LoadingDots_White from '../small-components/loading_white';
 
 // useeffect basically just either runs on every render of the site, or when the variable that we call the effect on changes.
 
 //TODO (doable after rest of functionality)
-//add loading, i wanna do 3 dots this time instead of a spinner
 //make a common selectbox component
 //update the inital state of fighters depending on which weightclass is selected
 
@@ -42,6 +41,14 @@ const weight_class = async (weightclass, select_red, select_blue) => {
 const fight_predict = async (fighter1, fighter2, accountid, SetData, setLoading, Loading, setPredicted) => {
   if(Loading) {
     alert("Already predicting...");
+    return;
+  }
+  if(fighter1 === fighter2) {
+    alert("Cannot pick same fighters!");
+    return;
+  }
+  if (fighter1 === "" || fighter2 === "") {
+    alert("Pick fighters!");
     return;
   }
   setPredicted(true);
@@ -108,7 +115,45 @@ export default function Predictor({LoggedIn}) {
     const value = select_weightclass_Ref.current.value;
     let select_red = document.getElementsByClassName('select-fighter-red')[0];
     let select_blue = document.getElementsByClassName('select-fighter-blue')[0];
-    let call = weight_class(String(value), select_red, select_blue);
+    let call = weight_class(value, select_red, select_blue);
+    switch (value) {
+      case "125":
+        setFighter1("Brandon Moreno");
+        setFighter2("Brandon Moreno");
+        break;
+      case "135":
+        setFighter1("Aljamain Sterling");
+        setFighter2("Aljamain Sterling");
+        break;
+      case "145":
+        setFighter1("Alexander Volkanovski");
+        setFighter2("Alexander Volkanovski");
+        break;
+      case "155":
+        setFighter1("Charles Oliveira");
+        setFighter2("Charles Oliveira");
+        break;
+      case "170":
+        setFighter1("Kamaru Usman");
+        setFighter2("Kamaru Usman");
+        break;
+      case "185":
+        setFighter1("Israel Adesanya");
+        setFighter2("Israel Adesanya");
+        break;
+      case "205":
+        setFighter1("Marvin Vettori");
+        setFighter2("Marvin Vettori");
+        break;
+      case "265":
+        setFighter1("Francis Ngannou");
+        setFighter2("Francis Ngannou");
+        break;
+      default:
+        setFighter1("Brandon Morneo");
+        setFighter2("Brandon Morneo");
+        break;
+    }
   }
 
   function handle_fighter1(){
@@ -161,7 +206,7 @@ export default function Predictor({LoggedIn}) {
                   <span className="stat-label">Age</span>
                 </div>
                 <div className="stat-card">
-                  <span className="stat-value">{Loading ? <LoadingDots></LoadingDots> : Data.R_wins}</span>
+                  <span className="stat-value">{Loading ? <LoadingDots></LoadingDots> : Data.R_wins + "-" + Data.R_draws + "-" + Data.R_losses}</span>
                   <span className="stat-label">Record</span>
                 </div>
                 <div className="stat-card">
@@ -197,7 +242,7 @@ export default function Predictor({LoggedIn}) {
                   <span className="stat-label">Age</span>
                 </div>
                 <div className="stat-card">
-                  <span className="stat-value">{ Loading ? <LoadingDots_Blue></LoadingDots_Blue> : Data.B_wins}</span>
+                  <span className="stat-value">{ Loading ? <LoadingDots_Blue></LoadingDots_Blue> : Data.B_wins + "-" + Data.B_draws + "-" + Data.B_losses}</span>
                   <span className="stat-label">Record</span>
                 </div>
                 <div className="stat-card">
@@ -219,16 +264,16 @@ export default function Predictor({LoggedIn}) {
           {/* Result */}
           <section className="result">
             <div className="winner-card">
-              <h3>WINNER: {Loading ? <LoadingDots></LoadingDots> : Data.Winner}</h3>
+              <h3>WINNER: {Loading ? <LoadingDots_White></LoadingDots_White> : Data.Winner}</h3>
               <p>
-                WIN PROBABILITY: <strong>{ Loading ? <LoadingDots></LoadingDots> : String(Math.round(Data.percentage_winner * 100 * 100) / 100)}%</strong>
+                WIN PROBABILITY: <strong>{Loading ? <LoadingDots_White /> : (Math.round(Data.percentage_winner * 10000) / 100) + "%"}</strong>
               </p>
               <div className="probabilities">
               <div className="prob red-outline">
-                {Fighter1 === Data.Winner ? Fighter1 : Fighter2 }: { Loading ? <LoadingDots></LoadingDots> : Math.round(Data.percentage_winner * 100 * 100) / 100}%
+                {Fighter1 === Data.Winner ? Fighter1 : Fighter2 }: { Loading ? <LoadingDots_White></LoadingDots_White> : Math.round(Data.percentage_winner * 100 * 100) / 100 + "%"}
               </div>
               <div className="prob blue-outline">
-                {Fighter1 === Data.Winner ? Fighter2 : Fighter1 }: { Loading ? <LoadingDots></LoadingDots> : Math.round(Data.percentage_loser * 100 * 100) / 100}%
+                {Fighter1 === Data.Winner ? Fighter2 : Fighter1 }: { Loading ? <LoadingDots_White></LoadingDots_White> : Math.round(Data.percentage_loser * 100 * 100) / 100 + "%"}
               </div>
             </div>
             </div>

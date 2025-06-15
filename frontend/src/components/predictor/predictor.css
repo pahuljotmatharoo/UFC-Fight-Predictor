@@ -211,19 +211,16 @@
 /* Winner “belt”   */
 /* =============== */
 .predictor-container .winner-card {
-  /* match the fighter‐card look */
   background: var(--overlay);
   backdrop-filter: blur(4px);
   border-radius: 8px;
   box-shadow: 0 8px 16px var(--shadow);
 
-  /* same width as your corners */
-  width: 300px;
+  
+  width: 349px;
   padding: 1.5rem;
   margin: 2rem auto 0;
 
-  /* accent on one side only (make this red for Red-corner winners,
-     or swap to var(--ufc-blue) for Blue-corner winners) */
   border-left: 6px solid var(--ufc-red);
 
   display: flex;

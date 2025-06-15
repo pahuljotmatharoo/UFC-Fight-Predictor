@@ -43,19 +43,21 @@ export default function Account_info({ LoggedIn, setLoggedIn }) {
 
     return(
         <div className="account-info-page">
-        <div className='image-info'>
-         <img src={user_stock} alt="My Logo" height={200} />
-            <div className="info">
-                <p>Account ID: {Info.AccountID}</p>
-                <p>Username: {Info.Username}</p>
-                <p>Password: {Info.Password}</p>
-            </div>
-            </div>
-            <div className="account-info-buttons">
-                <UfcButton click={navigate_user}>Change Username</UfcButton>
-                <UfcButton click={navigate_pass}>Change Password</UfcButton>
-                <UfcButton click={delete_acc}>Delete Account</UfcButton>
+            <div className="account-info">
+                <div className='image-info'>
+                <img src={user_stock} alt="My Logo" height={200} />
+                    <div className="info">
+                        <p>Account ID: {Info.AccountID}</p>
+                        <p>Username: {Info.Username}</p>
+                        <p>Password: {Info.Password}</p>
+                    </div>
                 </div>
+                <div className="account-info-buttons">
+                    <UfcButton click={navigate_user}>Change Username</UfcButton>
+                    <UfcButton click={navigate_pass}>Change Password</UfcButton>
+                    <UfcButton click={delete_acc}>Delete Account</UfcButton>
+                </div>
+            </div>
         </div>
     );
 }
