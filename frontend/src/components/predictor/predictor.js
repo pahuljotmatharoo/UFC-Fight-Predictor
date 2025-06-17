@@ -8,11 +8,8 @@ import LoadingDots_White from '../small-components/loading_white';
 
 // useeffect basically just either runs on every render of the site, or when the variable that we call the effect on changes.
 
-//TODO (doable after rest of functionality)
-//make a common selectbox component
-//update the inital state of fighters depending on which weightclass is selected
+//add error checking and we are basically done tbh for now
 
-//we need a fetch for the weight class
 const weight_class = async (weightclass, select_red, select_blue) => {
   const response = await fetch(`http://127.0.0.1:5000/get_names/${weightclass}`, {
         method: 'GET',
@@ -77,8 +74,8 @@ export default function Predictor({LoggedIn}) {
   const select_weightclass_Ref = useRef();
   const fighter1_raw = useRef();
   const fighter2_raw = useRef();
-  const [Fighter1, setFighter1] = useState("");
-  const [Fighter2, setFighter2] = useState("");
+  const [Fighter1, setFighter1] = useState("Brandon Moreno");
+  const [Fighter2, setFighter2] = useState("Brandon Moreno");
   const [Data, SetData] = useState({
     B_height: '',
     B_reach: '',
@@ -188,7 +185,7 @@ export default function Predictor({LoggedIn}) {
             <div className="corner red">
               <h2 className='red-h2'>Red Corner (Favourite)</h2>
               <select className='select-fighter-red' onChange={handle_fighter1} ref={fighter1_raw}>
-                  <option>Select a fighter!</option>
+                  <option>Brandon Moreno</option>
               </select>
 
               <h3 className="fighter-name">{Fighter1}</h3>
@@ -225,7 +222,7 @@ export default function Predictor({LoggedIn}) {
             <div className="corner blue">
               <h2 className='blue-h2'>Blue Corner (Underdog)</h2>
               <select className='select-fighter-blue' onChange={handle_fighter2} ref={fighter2_raw}>
-                  <option>Select a fighter!</option>
+                  <option>Brandon Moreno</option>
               </select>
               <h3 className="fighter-name">{Fighter2}</h3>
               <div className="stats-grid">

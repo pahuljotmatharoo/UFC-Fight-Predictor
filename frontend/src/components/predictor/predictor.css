@@ -35,9 +35,11 @@
   flex-direction: column;
   align-items: center;
   padding: 2rem 1rem;
+  margin-top: 30px;
+  margin-bottom: 30px;
   border-radius: 100px;
   font-family: 'Roboto', sans-serif;
-  width: 80%;
+  width: 65%;
   animation: fadeIn 1s;
 
   /* blur the content behind this box */

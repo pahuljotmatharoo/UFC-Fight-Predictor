@@ -17,31 +17,37 @@ function App() {
   return (
     <div className='landing-page'>
     <Router>
-      <nav className="navbar">
-        <img src={UFC_logo} alt="MyLogo" className="brand" height={20}></img>
-        {LoggedIn != 0 ? <img src={user_logo} alt="MyLogo" className="user" height={35}></img> :
-        null
-        }
+        <nav className="navbar" role="navigation" aria-label="Main">
+          
+          <div className="navbar__brand">
+            <Link to="/">
+            <img src={UFC_logo} alt="UFC Logo" />
+            </Link>
+          </div>
 
-        <ul className="nav-links">
+          <ul className="navbar__links">
+            <li><Link to="/">Login</Link></li>
+            <li><Link to="/register">Register</Link></li>
             {LoggedIn === 0 ? (
               <>
-                <li><Link to="/">Login</Link></li>
-                <li><Link to="/register">Register</Link></li>
               </>
-            ) : (
+              ) : (
               <>
-                <li><Link to="/">Login</Link></li>
-                <li><Link to="/register">Register</Link></li>
                 <li><Link to="/predictor">Predictor</Link></li>
                 <li><Link to="/results">Previous Results</Link></li>
-                <li><Link to="/account_info">Account Information</Link></li>
               </>
             )}
-        </ul>
-                {LoggedIn != 0 ? <UfcButton id="logout-button" click={ () => setLoggedIn(0)}>Logout</UfcButton>
-         : null}
-      </nav>
+          </ul>
+
+          <div className="navbar__user-controls">
+            <Link to="/account_info">
+            <img src={user_logo} alt="User Avatar" className="user" />
+            </Link>
+            {LoggedIn != 0 ? <UfcButton id="logout-button" click={ () => setLoggedIn(0)}>Logout</UfcButton>
+            : null}
+          </div>
+
+        </nav>
       <Routes>
         <Route path="/" element={<Login_page setLoggedIn={setLoggedIn} />} />
         <Route path="/register" element={<Register_page />} />
