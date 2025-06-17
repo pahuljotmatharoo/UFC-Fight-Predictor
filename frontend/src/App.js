@@ -7,8 +7,9 @@ import Results from './components/results/results';
 import Account_info from './components/auth/account_info';
 import Change_username from './components/account-details/change_username';
 import Change_password from './components/account-details/change_password';
-import UFC_logo from '../src/assets/UFC_Logo.png'
-import user_logo from '../src/assets/user.png'
+import UFC_logo from '../src/assets/UFC_Logo.png';
+import user_logo from '../src/assets/user.png';
+import UfcButton from './components/small-components/ufcbutton';
 import { useState } from 'react';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         {LoggedIn != 0 ? <img src={user_logo} alt="MyLogo" className="user" height={35}></img> :
         null
         }
+
         <ul className="nav-links">
             {LoggedIn === 0 ? (
               <>
@@ -37,6 +39,8 @@ function App() {
               </>
             )}
         </ul>
+                {LoggedIn != 0 ? <UfcButton id="logout-button" click={ () => setLoggedIn(0)}>Logout</UfcButton>
+         : null}
       </nav>
       <Routes>
         <Route path="/" element={<Login_page setLoggedIn={setLoggedIn} />} />

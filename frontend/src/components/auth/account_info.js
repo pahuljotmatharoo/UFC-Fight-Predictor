@@ -8,6 +8,14 @@ export default function Account_info({ LoggedIn, setLoggedIn }) {
     console.log(LoggedIn);
     const [Info, setInfo] = useState({});
     const navigate = useNavigate();
+    
+    var alerted = false;
+    if(LoggedIn === 0 && !alerted) {
+        alert("Not Logged In!");
+        navigate("/");
+        alerted = true;
+    }
+
     var tries = 0;
     const get_account_info = async () => {
         const response = await fetch(`http://127.0.0.1:5000/account/${LoggedIn}`, {
