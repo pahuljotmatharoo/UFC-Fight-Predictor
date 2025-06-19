@@ -11,61 +11,72 @@ import LoadingDots_White from '../small-components/loading_white';
 //add error checking and we are basically done tbh for now
 
 const weight_class = async (weightclass, select_red, select_blue) => {
-  const response = await fetch(`http://127.0.0.1:5000/get_names/${weightclass}`, {
-        method: 'GET',
-        });
-        var data = await response.json();
-        if(response.status === 200) {
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/get_names/${weightclass}`, {
+          method: 'GET',
+          });
+          var data = await response.json();
+          if(response.status === 200) {
 
-          //delete prev data
-          select_blue.innerHTML = '';
-          select_red.innerHTML = '';
+            //delete prev data
+            select_blue.innerHTML = '';
+            select_red.innerHTML = '';
 
-          for(var i = 0; i < data.length; i++) {
-            var option_b = document.createElement('option');
-            option_b.text = data[i];
-            option_b.value = data[i];
-            select_blue.append(option_b);
+            for(var i = 0; i < data.length; i++) {
+              var option_b = document.createElement('option');
+              option_b.text = data[i];
+              option_b.value = data[i];
+              select_blue.append(option_b);
 
-            var option_r = document.createElement('option');
-            option_r.text = data[i];
-            option_r.value = data[i];
-            select_red.append(option_r);
-          }
-      }
+              var option_r = document.createElement('option');
+              option_r.text = data[i];
+              option_r.value = data[i];
+              select_red.append(option_r);
+            }
+        }
+    }
+    catch {
+      alert("Backend Server is down!");
+    }
 }
 
 const fight_predict = async (fighter1, fighter2, accountid, SetData, setLoading, Loading, setPredicted) => {
-  if(Loading) {
-    alert("Already predicting...");
-    return;
-  }
-  if(fighter1 === fighter2) {
-    alert("Cannot pick same fighters!");
-    return;
-  }
-  if (fighter1 === "" || fighter2 === "") {
-    alert("Pick fighters!");
-    return;
-  }
-  setPredicted(true);
-  setLoading(true);
-  const formBody = new URLSearchParams({
-            fighter1: fighter1,
-            fighter2: fighter2,
-            accountid: accountid
-        }).toString();
+    if(Loading) {
+      alert("Already predicting...");
+      return;
+    }
+    if(fighter1 === fighter2) {
+      alert("Cannot pick same fighters!");
+      return;
+    }
+    if (fighter1 === "" || fighter2 === "") {
+      alert("Pick fighters!");
+      return;
+    }
+    setPredicted(true);
+    setLoading(true);
+    const formBody = new URLSearchParams({
+              fighter1: fighter1,
+              fighter2: fighter2,
+              accountid: accountid
+          }).toString();
+          
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/predictor`, {
+        method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded' 
+            },
+            body: formBody
+      })
+      let data = await response.json();
+      SetData(data);
+      setLoading(false);
+    }
 
-  const response = await fetch(`http://127.0.0.1:5000/predictor`, {
-    method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded' 
-        },
-        body: formBody
-  })
-  let data = await response.json();
-  SetData(data);
-  setLoading(false);
+    catch {
+      alert("Backend Server is down!");
+    }
 }
 
 export default function Predictor({LoggedIn}) {

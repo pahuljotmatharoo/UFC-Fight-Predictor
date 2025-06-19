@@ -5,29 +5,37 @@ import UfcButton from '../small-components/ufcbutton';
 import { useNavigate } from 'react-router-dom';
 
 export default function Account_info({ LoggedIn, setLoggedIn }) {
+    let call = false;
     console.log(LoggedIn);
     const [Info, setInfo] = useState({});
     const navigate = useNavigate();
     
-    var alerted = false;
+    let alerted = false;
+    useEffect(() => {
     if(LoggedIn === 0 && !alerted) {
+        alerted = true;
         alert("Not Logged In!");
         navigate("/");
-        alerted = true;
+    }
+    });
+
+    const get_account_info = async () => {
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/account/${LoggedIn}`, {
+            method: 'GET',
+            });
+            var result = await response.json();
+            setInfo(result);
+        }
+        catch {
+            alert("Backend Server is down!");
+            return;
+        }
     }
 
-    var tries = 0;
-    const get_account_info = async () => {
-        const response = await fetch(`http://127.0.0.1:5000/account/${LoggedIn}`, {
-        method: 'GET',
-        });
-        var result = await response.json();
-        setInfo(result);
-    }
-    
     useEffect(() => {
         get_account_info();
-    }, [LoggedIn]);
+    }, [call]);
 
     const navigate_user = async() => {
         navigate("/change_username")
@@ -36,16 +44,22 @@ export default function Account_info({ LoggedIn, setLoggedIn }) {
         navigate("/change_password")
     }
     const delete_acc = async() => {
-        const response = await fetch(`http://127.0.0.1:5000/account/delete/${LoggedIn}`, {
-        method: 'DELETE',
-        });
-        if(response.status === 200) {
-            alert("Account Deleted!");
-            setLoggedIn(0);
-            navigate("/");
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/account/delete/${LoggedIn}`, {
+            method: 'DELETE',
+            });
+            if(response.status === 200) {
+                alert("Account Deleted!");
+                setLoggedIn(0);
+                navigate("/");
+            }
+            else {
+                alert("Something went wrong");
+            }
         }
-        else {
-            alert("Something went wrong");
+        catch {
+            alert("Backend Server is down!");
+            return;
         }
     }
 

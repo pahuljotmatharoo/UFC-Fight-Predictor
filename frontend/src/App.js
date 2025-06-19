@@ -40,14 +40,17 @@ function App() {
           </ul>
 
           <div className="navbar__user-controls">
-            <Link to="/account_info">
+            {LoggedIn != 0 ? <Link to="/account_info">
             <img src={user_logo} alt="User Avatar" className="user" />
             </Link>
+            : null}
+            
             {LoggedIn != 0 ? <UfcButton id="logout-button" click={ () => setLoggedIn(0)}>Logout</UfcButton>
             : null}
           </div>
 
         </nav>
+        
       <Routes>
         <Route path="/" element={<Login_page setLoggedIn={setLoggedIn} />} />
         <Route path="/register" element={<Register_page />} />

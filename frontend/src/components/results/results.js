@@ -1,11 +1,3 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Result_card from './result-card';
@@ -17,6 +9,7 @@ export default function Results({LoggedIn}) {
   var load = false;
   var function_call = false;
   console.log(LoggedIn);
+
   useEffect(() => {
     if(LoggedIn === 0 && !load) {
     alert("Not Logged in!");
@@ -26,12 +19,19 @@ export default function Results({LoggedIn}) {
 ) 
 
   const [Data, setData] = useState([]);
+
   const get_record = async() => {
-    const response = await fetch(`http://127.0.0.1:5000/results/${LoggedIn}`, {
-      method: 'GET',
-    })
-    var data = await response.json();
-    setData(data.result);
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/results/${LoggedIn}`, {
+        method: 'GET',
+      })
+      var data = await response.json();
+      setData(data.result);
+    }
+
+  catch {
+      alert("Backend Server is down!");
+    }
   }
 
   useEffect(() => {
