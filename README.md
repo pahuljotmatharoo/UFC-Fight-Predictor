@@ -15,7 +15,7 @@ A full-stack application that predicts UFC fight outcomes using a Flask-based Py
 # Tech Stack
 - **Backend:** Flask · SQLAlchemy · pyodbc · pandas · scikit-learn
 
-- **Frontend:** React · Axios · React Router
+- **Frontend:** React · React Router
 
 - **Database:** Microsoft SQL Server (via ODBC Driver 17)
 
