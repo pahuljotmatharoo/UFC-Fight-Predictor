@@ -4,20 +4,15 @@ import UFC_logo from '../../assets/UFC_Logo.png'
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function Register_page() {
-    const username = useRef(null);
-    const password = useRef(null);
-    const password_conf = useRef(null);
-    const navigate = useNavigate();
-    
-    const click = async() => {
-          // Build the x-www-form-urlencoded body
-        const formBody = new URLSearchParams({
-            username: username.current.value,
-            password: password.current.value,
-            confirmpassword: password_conf.current.value,
-        }).toString(); // "username=alice&password=secret"
+const click = async(username, password, password_conf, navigate) => {
+        // Build the x-www-form-urlencoded body
+    const formBody = new URLSearchParams({
+        username: username.current.value,
+        password: password.current.value,
+        confirmpassword: password_conf.current.value,
+    }).toString(); // "username=alice&password=secret"
 
+    try {
         const response = await fetch('http://127.0.0.1:5000/register', {
         method: 'POST',
         headers: {
@@ -31,6 +26,18 @@ export default function Register_page() {
             navigate("/");
         }
     }
+
+    catch {
+        alert("Backend Server is Down!");
+        return;
+    }
+}
+
+export default function Register_page() {
+    const username = useRef(null);
+    const password = useRef(null);
+    const password_conf = useRef(null);
+    const navigate = useNavigate();
     
     return(
         <div className='login-page'>
@@ -42,7 +49,7 @@ export default function Register_page() {
                 <Logo>
                     <img src={UFC_logo} alt="My Logo" height={20} />
                 </Logo>
-                <Submit onClick={click}></Submit>
+                <Submit onClick={() => click(username, password, password_conf, navigate)}></Submit>
             </Login>
         </div>
     );
