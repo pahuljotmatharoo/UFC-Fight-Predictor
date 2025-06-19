@@ -2,22 +2,22 @@
 A full-stack application that predicts UFC fight outcomes using a Flask-based Python backend and a React frontend.
 
 # Features
-- Authentication: User registration and login
+- **Authentication:** User registration and login
 
-- Fight Prediction: Submit two fighters and receive win probabilities
+- **Fight Prediction:** Submit two fighters and receive win probabilities
 
-- History: View past predictions per account
+- **History:** View past predictions per account
 
-- Fighter Directory: Browse fighters by weight class
+- **Fighter Directory:** Browse fighters by weight class
 
-- Account Management: Change username, change password, delete account
+- **Account Management:** Change username, change password, delete account
 
 # Tech Stack
-- Backend: Flask · SQLAlchemy · pyodbc · pandas · scikit-learn
+- **Backend:** Flask · SQLAlchemy · pyodbc · pandas · scikit-learn
 
-- Frontend: React · Axios · React Router
+- **Frontend:** React · Axios · React Router
 
-- Database: Microsoft SQL Server (via ODBC Driver 17)
+- **Database:** Microsoft SQL Server (via ODBC Driver 17)
 
 # Prerequisites
 - Python ≥3.8 (python.org)
