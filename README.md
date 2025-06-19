@@ -1,125 +1,101 @@
-UFC Fight Predictor
+# UFC Fight Predictor
 A full-stack application that predicts UFC fight outcomes using a Flask-based Python backend and a React frontend.
 
-Table of Contents
-Features
+# Features
+- Authentication: User registration and login
 
-Tech Stack
+- Fight Prediction: Submit two fighters and receive win probabilities
 
-Prerequisites
+- History: View past predictions per account
 
-Installation
+- Fighter Directory: Browse fighters by weight class
 
-Backend Setup
+- Account Management: Change username, change password, delete account
 
-Frontend Setup
+# Tech Stack
+- Backend: Flask · SQLAlchemy · pyodbc · pandas · scikit-learn
 
-Running the App
+- Frontend: React · Axios · React Router
 
-Start Backend
+- Database: Microsoft SQL Server (via ODBC Driver 17)
 
-Start Frontend
+# Prerequisites
+- Python ≥3.8 (python.org)
 
-API Endpoints
+- Node.js ≥14.x & npm or yarn (nodejs.org)
 
-Project Structure
+- Microsoft SQL Server instance with a database named UFC (Microsoft SQL Server)
 
-Contributing
+- ODBC Driver 17 for SQL Server installed
 
-License
+# Installation
 
-Features
-Authentication: User registration and login
+### Backend Setup
 
-Fight Prediction: Submit two fighters and receive win probabilities
-
-History: View past predictions per account
-
-Fighter Directory: Browse fighters by weight class
-
-Account Management: Change username, change password, delete account
-
-Tech Stack
-Backend: Flask · SQLAlchemy · pyodbc · pandas · scikit-learn
-
-Frontend: React · Axios · React Router
-
-Database: Microsoft SQL Server (via ODBC Driver 17)
-
-Prerequisites
-Python ≥3.8 (python.org)
-
-Node.js ≥14.x & npm or yarn (nodejs.org)
-
-Microsoft SQL Server instance with a database named UFC (Microsoft SQL Server)
-
-ODBC Driver 17 for SQL Server installed
-
-Installation
-Backend Setup
 Clone the repo
 
-bash
-Copy
-Edit
+```bash
 git clone https://github.com/yourusername/ufc-fight-predictor.git
 cd ufc-fight-predictor
+```
+
 Create & activate a virtual environment
 
-bash
-Copy
-Edit
+```bash
 python -m venv venv
 source venv/bin/activate    # macOS/Linux
 venv\Scripts\activate       # Windows
+```
+
 Install Python dependencies
 
-bash
-Copy
-Edit
+```bash
 pip install -r requirements.txt
+```
+
 Configure database connection
 
 Edit config.py or set the env var SQLALCHEMY_DATABASE_URI.
 
 Example URI:
 
-pgsql
-Copy
-Edit
+```pgsql
 mssql+pyodbc://@<SERVER_NAME>/UFC?driver=ODBC+Driver+17+for+SQL+Server&trusted_connection=yes
 Place the fighter data CSV
 Ensure ufc_master_data.csv is in the project root.
+```
 
-Frontend Setup
+### Frontend Setup
+
 Navigate to the React app folder
 
-bash
+```bash
 Copy
 Edit
 cd frontend
+```
+
 Install JavaScript dependencies
 
-bash
-Copy
-Edit
+```bash
 npm install
 # or
 yarn install
+```
+
 Configure API base URL
 In your React app’s .env file, set:
-
-ini
-Copy
-Edit
+```
 REACT_APP_API_URL=http://localhost:5000
-Running the App
-Start Backend
+```
+
+# Running the App
+
+### Start Backend
+
 From the project root:
 
-bash
-Copy
-Edit
+```bash
 # Option A: using Flask CLI
 export FLASK_APP=run.py
 export FLASK_ENV=development
@@ -127,45 +103,47 @@ flask run
 
 # Option B: direct
 python run.py
-The backend serves at http://localhost:5000 by default.
+```
 
-Start Frontend
+The backend serves at http://localhost:3000 by default.
+
+### Start Frontend
+
 From the frontend/ directory:
 
-bash
-Copy
-Edit
+```bash
 npm start
 # or
 yarn start
-The React app opens at http://localhost:3000, proxying API requests to the Flask server.
+```
 
-API Endpoints
-Authentication
-Method	Endpoint	Description
-POST	/login	Log in with username & password
-POST	/register	Register new user with username, password & confirmpassword
+The React app opens at http://localhost:3000.
 
-Predictions
-Method	Endpoint	Description
-POST	/predictor	Predict fight (fighter1, fighter2, accountid)
-GET	/results/<accountID>	Retrieve past predictions for accountID
+# API Endpoints
+### Authentication
+- POST	/login	Log in with username & password
 
-Fighters
-Method	Endpoint	Description
-GET	/get_names/<weightt>	List fighter names in weight class weightt
+- POST	/register	Register new user with username, password & confirmpassword
 
-Account Management
-Method	Endpoint	Description
-GET	/account/<accountID>	Get account info (ID, username, password)
-DELETE	/account/delete/<accountID>	Delete user & their prediction history
-PATCH	/account/change_user/<accountID>	Change username (old_username, new_username, old_password)
-PATCH	/account/change_password/<accountID>	Change password (username, old_password, new_password)
+### Predictions
+- POST	/predictor	Predict fight (fighter1, fighter2, accountid)
+  
+- GET	/results/<accountID>	Retrieve past predictions for accountID
 
-Project Structure
-bash
-Copy
-Edit
+### Fighters
+- GET	/get_names/<weightt>	List fighter names in weight class weightt
+
+### Account Management
+- GET	/account/<accountID>	Get account info (ID, username, password)
+  
+- DELETE	/account/delete/<accountID>	Delete user & their prediction history
+  
+- PATCH	/account/change_user/<accountID>	Change username (old_username, new_username, old_password)
+  
+- PATCH	/account/change_password/<accountID>	Change password (username, old_password, new_password)
+
+# Project Structure
+```bash
 ├── run.py
 ├── config.py
 ├── model.py
@@ -181,18 +159,4 @@ Edit
         ├── predictor.py    # /predictor, /results
         ├── fighters.py     # /get_names
         └── account.py      # /account/*
-Contributing
-Fork the repo
-
-Create a feature branch (git checkout -b feature/foo)
-
-Commit your changes (git commit -am "Add foo")
-
-Push to the branch (git push origin feature/foo)
-
-Open a Pull Request
-
-Please follow existing code style and include tests where appropriate.
-
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
+```
