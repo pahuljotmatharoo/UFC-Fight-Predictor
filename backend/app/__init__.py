@@ -7,6 +7,7 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
+    #Tell CORS where we should be getting our requests from
     CORS(app, supports_credentials=True, origins=Config.CORS_ORIGINS)
     db.init_app(app)
 
