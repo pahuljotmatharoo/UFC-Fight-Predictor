@@ -1,6 +1,20 @@
 # UFC Fight Predictor
 A full-stack application that predicts UFC fight outcomes using a Flask-based Python backend and a React frontend.
 
+![login](https://github.com/user-attachments/assets/6a6218d1-fead-41f0-8940-a21cc0b00b1e)
+![register](https://github.com/user-attachments/assets/14aad096-5aa7-4539-a8e9-77d495b455b9)
+![register_ex](https://github.com/user-attachments/assets/e968b5f8-321e-456f-9008-23cac98c1674)
+![loginexample](https://github.com/user-attachments/assets/68a5a1c4-08dc-4cb3-a1e3-91e323f54487)
+![predictor](https://github.com/user-attachments/assets/4f158705-2e70-4d6c-8fe0-3b39f3d0e348)
+![weight_class](https://github.com/user-attachments/assets/582b2319-ed9e-4e14-b203-398caa93be46)
+![pick_fighter](https://github.com/user-attachments/assets/b31aa219-12b7-4418-acf4-ec7bc695f7ad)
+![loading](https://github.com/user-attachments/assets/79b32ef5-9025-45df-97f5-5ffc6cb01ffc)
+![winner](https://github.com/user-attachments/assets/f5ecc739-a73e-4371-91ac-28becc6377b3)
+![results](https://github.com/user-attachments/assets/0629c17c-9fd7-4715-be43-9c5c25d553f5)
+![account](https://github.com/user-attachments/assets/f2820a16-024c-4e3d-8eae-06f7d8fb8778)
+![changeuser](https://github.com/user-attachments/assets/acbf9327-0e39-4ccb-98c3-a43bfa89e1c9)
+![changepass](https://github.com/user-attachments/assets/f8295433-7eb7-43f7-9c4a-5c4b9dfc6a59)
+
 # Features
 - **Authentication:** User registration and login
 
@@ -15,7 +29,7 @@ A full-stack application that predicts UFC fight outcomes using a Flask-based Py
 # Tech Stack
 - **Backend:** Flask · SQLAlchemy · pyodbc · pandas · scikit-learn
 
-- **Frontend:** React · Axios · React Router
+- **Frontend:** React · React Router
 
 - **Database:** Microsoft SQL Server (via ODBC Driver 17)
 
