@@ -11,9 +11,10 @@ import UFC_logo from '../src/assets/UFC_Logo.png';
 import user_logo from '../src/assets/user.png';
 import UfcButton from './components/small-components/ufcbutton';
 import { useState } from 'react';
-
+//gonna add a API key per user
 function App() {
   const [LoggedIn, setLoggedIn] = useState(0);
+  const [API_KEY, setAPI_KEY] = useState("0");
   return (
     <div className='landing-page'>
     <Router>
@@ -52,9 +53,9 @@ function App() {
         </nav>
         
       <Routes>
-        <Route path="/" element={<Login_page setLoggedIn={setLoggedIn} />} />
+        <Route path="/" element={<Login_page setLoggedIn={setLoggedIn} setAPI_KEY={setAPI_KEY} />} />
         <Route path="/register" element={<Register_page />} />
-        <Route path="/predictor" element={<Predictor LoggedIn={LoggedIn} />} />
+        <Route path="/predictor" element={<Predictor LoggedIn={LoggedIn} API_KEY={API_KEY} />} />
         <Route path="/results" element={<Results LoggedIn={LoggedIn} />} />
         <Route path="/account_info" element={<Account_info LoggedIn={LoggedIn} setLoggedIn={setLoggedIn}/>} />
         <Route path="/change_username" element={<Change_username LoggedIn={LoggedIn}/>}/>

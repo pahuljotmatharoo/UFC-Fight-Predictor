@@ -4,7 +4,7 @@ import { Username, Password, Submit, Logo} from '@react-login-page/base';
 import UFC_logo from '../../assets/UFC_Logo.png'
 import { useNavigate } from 'react-router-dom';
 
-export default function Login_page({setLoggedIn}) {
+export default function Login_page({setLoggedIn, setAPI_KEY}) {
     const username = useRef(null);
     const password = useRef(null);
     const navigate = useNavigate();
@@ -30,6 +30,7 @@ export default function Login_page({setLoggedIn}) {
             if(response.status === 200) {
                 alert("Logged in!");
                 setLoggedIn(data.accountID);
+                setAPI_KEY(data.API_KEY);
                 navigate("/predictor");
             }
             else if(response.status === 401) {

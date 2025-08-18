@@ -25,14 +25,14 @@ def login():
     if data.password != password:
         return jsonify(), 401
 
-    return jsonify({"accountID": data.ID}), 200
+    return jsonify({"accountID": data.ID, "API_KEY" : data.API_KEY}), 200
 
 @auth_bp.route('/register', methods=['POST'])
 def register():
     user = request.form.get('username')
     password = request.form.get('password')
     password_confirm = request.form.get('confirmpassword')
-    api_key = generate_random_string(8) #generate API_KEY
+    api_key = generate_random_string(10) #generate API_KEY
     if password != password_confirm:
         return jsonify(), 206
 

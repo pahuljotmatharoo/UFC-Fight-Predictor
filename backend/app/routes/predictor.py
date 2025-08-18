@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from ..database import db
-from ..models import Predictions
+from ..models import Predictions, Login
 from model import get_fighter_data, data_builder, predict_fight_outcome, lr
 
 predictor_bp = Blueprint('predictor', __name__)
@@ -13,11 +13,15 @@ def results(idd):
     entries = Predictions.query.filter_by(AccountID=idd).all()
     return jsonify({"result": [e.to_dict() for e in entries]}), 200
 
-@predictor_bp.route('/predictor', methods=['POST'])
-def predictor():
+@predictor_bp.route('/<API_KEY>/predictor', methods=['POST'])
+def predictor(API_KEY):
     f1 = request.form['fighter1']
     f2 = request.form['fighter2']
     accountid = request.form['accountid']
+    user = Login.query.get(accountid)
+
+    if user.API_KEY != API_KEY:
+        return 400
 
     f1_data = get_fighter_data(*f1.split())
     f2_data = get_fighter_data(*f2.split())

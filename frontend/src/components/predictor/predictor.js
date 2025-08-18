@@ -10,9 +10,9 @@ import LoadingDots_White from '../small-components/loading_white';
 
 //add error checking and we are basically done tbh for now
 
-const weight_class = async (weightclass, select_red, select_blue) => {
+const weight_class = async (weightclass, select_red, select_blue, LoggedIn, API_KEY) => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/get_names/${weightclass}`, {
+      const response = await fetch(`http://127.0.0.1:5000/get_names/${API_KEY}/${weightclass}?user_id=${encodeURIComponent(LoggedIn)}`, {
           method: 'GET',
           });
           var data = await response.json();
@@ -40,7 +40,7 @@ const weight_class = async (weightclass, select_red, select_blue) => {
     }
 }
 
-const fight_predict = async (fighter1, fighter2, accountid, SetData, setLoading, Loading, setPredicted) => {
+const fight_predict = async (fighter1, fighter2, accountid, SetData, setLoading, Loading, setPredicted, API_KEY) => {
     if(Loading) {
       alert("Already predicting...");
       return;
@@ -62,7 +62,7 @@ const fight_predict = async (fighter1, fighter2, accountid, SetData, setLoading,
           }).toString();
           
     try {
-      const response = await fetch(`http://127.0.0.1:5000/predictor`, {
+      const response = await fetch(`http://127.0.0.1:5000/${API_KEY}/predictor`, {
         method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded' 
@@ -70,6 +70,10 @@ const fight_predict = async (fighter1, fighter2, accountid, SetData, setLoading,
             body: formBody
       })
       let data = await response.json();
+      if(response.status === 400) {
+        alert("Invalid API Key");
+      }
+      console.log(data);
       SetData(data);
       setLoading(false);
     }
@@ -79,7 +83,7 @@ const fight_predict = async (fighter1, fighter2, accountid, SetData, setLoading,
     }
 }
 
-export default function Predictor({LoggedIn}) {
+export default function Predictor({LoggedIn, API_KEY}) {
   const [Predicted, setPredicted] = useState(false);
   const [Loading, setLoading] = useState(false);
   const select_weightclass_Ref = useRef();
@@ -123,7 +127,7 @@ export default function Predictor({LoggedIn}) {
     const value = select_weightclass_Ref.current.value;
     let select_red = document.getElementsByClassName('select-fighter-red')[0];
     let select_blue = document.getElementsByClassName('select-fighter-blue')[0];
-    let call = weight_class(value, select_red, select_blue);
+    let call = weight_class(value, select_red, select_blue, LoggedIn, API_KEY);
     switch (value) {
       case "125":
         setFighter1("Brandon Moreno");
@@ -266,7 +270,7 @@ export default function Predictor({LoggedIn}) {
           </section>
 
           {/* Predict Button */}
-          <UfcButton click={() => fight_predict(Fighter1,Fighter2,LoggedIn, SetData, setLoading, Loading, setPredicted)}>
+          <UfcButton click={() => fight_predict(Fighter1,Fighter2,LoggedIn, SetData, setLoading, Loading, setPredicted, API_KEY)}>
             {"⚡ Predict Winner"}
             </UfcButton>      
           {/* Result */}

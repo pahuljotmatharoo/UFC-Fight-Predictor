@@ -5,6 +5,7 @@ class Login(db.Model):
     ID       = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(10), nullable=False, unique=True)
     password = db.Column(db.String(10), nullable=False)
+    API_KEY = db.Column(db.String(10), nullable=True)
 
 class Predictions(db.Model):
     __tablename__ = 'UFC_HISTORY'
