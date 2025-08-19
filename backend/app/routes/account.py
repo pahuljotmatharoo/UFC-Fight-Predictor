@@ -1,4 +1,6 @@
 from flask import Blueprint, request, jsonify
+
+from .. import API_KEY_VERIFY
 from ..database import db
 from ..models import Login, Predictions
 
@@ -45,14 +47,17 @@ def change_password(accountid):
     db.session.commit()
     return jsonify(), 200
 
-@account_bp.route('/account/<id_acc>', methods=['GET'])
-def account_info(id_acc):
-    user = Login.query.get(id_acc)
+@account_bp.route('/<API_KEY>/account', methods=['GET'])
+def account_info(API_KEY):
+    if API_KEY_VERIFY(API_KEY) == 400:
+        return 400
+    user = Login.query.get(request.args.get("user_id"))
     if not user:
         return jsonify(), 404
 
     return jsonify({
         "AccountID": user.ID,
         "Username":  user.username,
-        "Password":  user.password
+        "Password":  user.password,
+        "API_KEY": user.API_KEY
     }), 200

@@ -56,8 +56,8 @@ function App() {
         <Route path="/" element={<Login_page setLoggedIn={setLoggedIn} setAPI_KEY={setAPI_KEY} />} />
         <Route path="/register" element={<Register_page />} />
         <Route path="/predictor" element={<Predictor LoggedIn={LoggedIn} API_KEY={API_KEY} />} />
-        <Route path="/results" element={<Results LoggedIn={LoggedIn} />} />
-        <Route path="/account_info" element={<Account_info LoggedIn={LoggedIn} setLoggedIn={setLoggedIn}/>} />
+        <Route path="/results" element={<Results LoggedIn={LoggedIn} API_KEY={API_KEY} />} />
+        <Route path="/account_info" element={<Account_info LoggedIn={LoggedIn} API_KEY={API_KEY} setLoggedIn={setLoggedIn}/>} />
         <Route path="/change_username" element={<Change_username LoggedIn={LoggedIn}/>}/>
         <Route path="/change_password" element={<Change_password LoggedIn={LoggedIn}/>}/>
       </Routes>

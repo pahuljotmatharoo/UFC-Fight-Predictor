@@ -4,10 +4,10 @@ import Result_card from './result-card';
 import { useNavigate } from 'react-router-dom';
 import './results.css'
 
-export default function Results({LoggedIn}) {
+export default function Results({LoggedIn, API_KEY}) {
   const navigate = useNavigate();
-  var load = false;
-  var function_call = false;
+  let load = false;
+  let function_call = false;
   console.log(LoggedIn);
 
   useEffect(() => {
@@ -15,14 +15,14 @@ export default function Results({LoggedIn}) {
     alert("Not Logged in!");
     load = true;
     navigate("/");
-  }}
-) 
+    }}
+  ) 
 
   const [Data, setData] = useState([]);
 
   const get_record = async() => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/results/${LoggedIn}`, {
+      const response = await fetch(`http://127.0.0.1:5000/results/${API_KEY}?user_id=${encodeURIComponent(LoggedIn)}`, {
         method: 'GET',
       })
       var data = await response.json();
@@ -36,8 +36,8 @@ export default function Results({LoggedIn}) {
 
   useEffect(() => {
     if(!function_call) {
-    get_record();
-    function_call = true;
+      get_record();
+      function_call = true;
     }
   },[LoggedIn]);
 

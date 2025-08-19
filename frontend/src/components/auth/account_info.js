@@ -4,7 +4,7 @@ import user_stock from '../../assets/user.png'
 import UfcButton from '../small-components/ufcbutton';
 import { useNavigate } from 'react-router-dom';
 
-export default function Account_info({ LoggedIn, setLoggedIn }) {
+export default function Account_info({ LoggedIn, API_KEY, setLoggedIn }) {
     let call = false;
     console.log(LoggedIn);
     const [Info, setInfo] = useState({});
@@ -21,7 +21,7 @@ export default function Account_info({ LoggedIn, setLoggedIn }) {
 
     const get_account_info = async () => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/account/${LoggedIn}`, {
+            const response = await fetch(`http://127.0.0.1:5000/${API_KEY}/account?user_id=${encodeURIComponent(LoggedIn)}`, {
             method: 'GET',
             });
             var result = await response.json();
@@ -34,8 +34,11 @@ export default function Account_info({ LoggedIn, setLoggedIn }) {
     }
 
     useEffect(() => {
-        get_account_info();
-    }, [call]);
+        if(!call) {
+            get_account_info();
+            call = true;
+        }
+    }, [LoggedIn]);
 
     const navigate_user = async() => {
         navigate("/change_username")
@@ -72,6 +75,7 @@ export default function Account_info({ LoggedIn, setLoggedIn }) {
                         <p>Account ID: {Info.AccountID}</p>
                         <p>Username: {Info.Username}</p>
                         <p>Password: {Info.Password}</p>
+                        <p>API Key: {Info.API_KEY}</p>
                     </div>
                 </div>
                 <div className="account-info-buttons">

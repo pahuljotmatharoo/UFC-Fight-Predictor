@@ -1,7 +1,17 @@
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 from .database import db
 from config import Config
+from .models import Login
+
+results_cache = {} # cache for results
+fights_list_cache = {}
+
+def API_KEY_VERIFY(API_KEY):
+    user = Login.query.get(request.args.get('user_id'))
+    if user.API_KEY != API_KEY:
+        return 400
+    return None
 
 def create_app():
     app = Flask(__name__)

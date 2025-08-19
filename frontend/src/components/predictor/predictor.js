@@ -58,11 +58,10 @@ const fight_predict = async (fighter1, fighter2, accountid, SetData, setLoading,
     const formBody = new URLSearchParams({
               fighter1: fighter1,
               fighter2: fighter2,
-              accountid: accountid
           }).toString();
           
     try {
-      const response = await fetch(`http://127.0.0.1:5000/${API_KEY}/predictor`, {
+      const response = await fetch(`http://127.0.0.1:5000/${API_KEY}/predictor?user_id=${encodeURIComponent(accountid)}`, {
         method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded' 
