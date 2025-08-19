@@ -8,8 +8,6 @@ import LoadingDots_White from '../small-components/loading_white';
 
 // useeffect basically just either runs on every render of the site, or when the variable that we call the effect on changes.
 
-//add error checking and we are basically done tbh for now
-
 const weight_class = async (weightclass, select_red, select_blue, LoggedIn, API_KEY) => {
     try {
       const response = await fetch(`http://127.0.0.1:5000/get_names/${API_KEY}/${weightclass}?user_id=${encodeURIComponent(LoggedIn)}`, {
@@ -61,7 +59,7 @@ const fight_predict = async (fighter1, fighter2, accountid, SetData, setLoading,
           }).toString();
           
     try {
-      const response = await fetch(`http://127.0.0.1:5000/${API_KEY}/predictor?user_id=${encodeURIComponent(accountid)}`, {
+      const response = await fetch(`http://127.0.0.1:5000/predictor/${API_KEY}?user_id=${encodeURIComponent(accountid)}`, {
         method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded' 

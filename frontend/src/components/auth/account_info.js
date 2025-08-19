@@ -16,18 +16,18 @@ export default function Account_info({ LoggedIn, API_KEY, setLoggedIn }) {
         alerted = true;
         alert("Not Logged In!");
         navigate("/");
-    }
+        }
     });
 
     const get_account_info = async () => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/${API_KEY}/account?user_id=${encodeURIComponent(LoggedIn)}`, {
+            const response = await fetch(`http://127.0.0.1:5000/account/${API_KEY}?user_id=${encodeURIComponent(LoggedIn)}`, {
             method: 'GET',
             });
             var result = await response.json();
             setInfo(result);
         }
-        catch {
+        catch(error) {
             alert("Backend Server is down!");
             return;
         }
@@ -38,7 +38,7 @@ export default function Account_info({ LoggedIn, API_KEY, setLoggedIn }) {
             get_account_info();
             call = true;
         }
-    }, [LoggedIn]);
+    }, [API_KEY]); // using API_KEY here as LoggedIn changes after clicking delete, causes unnessassary call to account info
 
     const navigate_user = async() => {
         navigate("/change_username")
@@ -46,15 +46,17 @@ export default function Account_info({ LoggedIn, API_KEY, setLoggedIn }) {
     const navigate_pass = async() => {
         navigate("/change_password")
     }
+
     const delete_acc = async() => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/account/delete/${LoggedIn}`, {
+            const response = await fetch(`http://127.0.0.1:5000/account/delete/${API_KEY}?user_id=${encodeURIComponent(LoggedIn)}`, {
             method: 'DELETE',
             });
             if(response.status === 200) {
                 alert("Account Deleted!");
                 setLoggedIn(0);
                 navigate("/");
+                return;
             }
             else {
                 alert("Something went wrong");

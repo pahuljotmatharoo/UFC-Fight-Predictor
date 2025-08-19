@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from .. import API_KEY_VERIFY
+from .. import API_KEY_VERIFY, results_cache
 from ..database import db
 from ..models import Predictions, Login
 from model import get_fighter_data, data_builder, predict_fight_outcome, lr
@@ -10,10 +10,15 @@ predictor_bp = Blueprint('predictor', __name__)
 def results(API_KEY):
     if API_KEY_VERIFY(API_KEY) == 400:
         return 400
-    entries = Predictions.query.filter_by(AccountID=request.args.get('user_id')).all()
-    return jsonify({"result": [e.to_dict() for e in entries]}), 200
+    user_id = request.args.get('user_id')
+    if user_id in results_cache:
+        return jsonify({"result": [e.to_dict() for e in results_cache[user_id]]}), 200
+    else:
+        entries = Predictions.query.filter_by(AccountID=request.args.get('user_id')).all()
+        results_cache[user_id] = entries
+        return jsonify({"result": [e.to_dict() for e in entries]}), 200
 
-@predictor_bp.route('/<API_KEY>/predictor', methods=['POST'])
+@predictor_bp.route('/predictor/<API_KEY>', methods=['POST'])
 def predictor(API_KEY):
     f1 = request.form['fighter1']
     f2 = request.form['fighter2']

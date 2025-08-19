@@ -5,7 +5,6 @@ from config import Config
 from .models import Login
 
 results_cache = {} # cache for results
-fights_list_cache = {}
 
 def API_KEY_VERIFY(API_KEY):
     user = Login.query.get(request.args.get('user_id'))

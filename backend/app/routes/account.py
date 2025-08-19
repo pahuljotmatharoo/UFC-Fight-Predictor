@@ -6,14 +6,14 @@ from ..models import Login, Predictions
 
 account_bp = Blueprint('account', __name__)
 
-@account_bp.route('/account/delete/<accountid>', methods=['DELETE'])
-def delete_account(accountid):
-    user = Login.query.get(accountid)
-    if not user:
-        return jsonify(), 401
+@account_bp.route('/account/delete/<API_KEY>', methods=['DELETE'])
+def delete_account(API_KEY):
+    user = Login.query.get(request.args.get("user_id"))
+    if API_KEY_VERIFY(API_KEY) == 400:
+        return 400
 
     # delete history first
-    Predictions.query.filter_by(AccountID=accountid).delete()
+    Predictions.query.filter_by(AccountID=request.args.get("user_id")).delete()
     db.session.delete(user)
     db.session.commit()
 
@@ -47,7 +47,7 @@ def change_password(accountid):
     db.session.commit()
     return jsonify(), 200
 
-@account_bp.route('/<API_KEY>/account', methods=['GET'])
+@account_bp.route('/account/<API_KEY>', methods=['GET'])
 def account_info(API_KEY):
     if API_KEY_VERIFY(API_KEY) == 400:
         return 400
