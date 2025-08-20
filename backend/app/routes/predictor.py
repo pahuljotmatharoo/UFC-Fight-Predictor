@@ -8,7 +8,7 @@ predictor_bp = Blueprint('predictor', __name__)
 
 @predictor_bp.route('/results/<API_KEY>', methods=['GET'])
 def results(API_KEY):
-    if API_KEY_VERIFY(API_KEY) == 400:
+    if not API_KEY_VERIFY(API_KEY):
         return 400
     user_id = request.args.get('user_id')
     if user_id in results_cache:
@@ -23,7 +23,7 @@ def predictor(API_KEY):
     f1 = request.form['fighter1']
     f2 = request.form['fighter2']
 
-    if API_KEY_VERIFY(API_KEY) == 400:
+    if not API_KEY_VERIFY(API_KEY):
         return 400
 
     f1_data = get_fighter_data(*f1.split())

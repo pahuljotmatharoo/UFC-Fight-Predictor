@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 
-from .. import API_KEY_VERIFY
+from .. import API_KEY_VERIFY, results_cache
 from ..database import db
 from ..models import Login, Predictions
 
@@ -9,7 +9,7 @@ account_bp = Blueprint('account', __name__)
 @account_bp.route('/account/delete/<API_KEY>', methods=['DELETE'])
 def delete_account(API_KEY):
     user = Login.query.get(request.args.get("user_id"))
-    if API_KEY_VERIFY(API_KEY) == 400:
+    if not API_KEY_VERIFY(API_KEY):
         return 400
 
     # delete history first
@@ -17,6 +17,14 @@ def delete_account(API_KEY):
     db.session.delete(user)
     db.session.commit()
 
+    return jsonify(), 200
+
+@account_bp.route('/logout/<API_KEY>', methods=['GET'])
+def logout(API_KEY):
+    if not API_KEY_VERIFY(API_KEY):
+        return 400
+    if request.args.get('user_id') in results_cache:
+        del results_cache[request.args.get('user_id')]
     return jsonify(), 200
 
 @account_bp.route('/account/change_user/<accountid>', methods=['PATCH'])
@@ -49,7 +57,7 @@ def change_password(accountid):
 
 @account_bp.route('/account/<API_KEY>', methods=['GET'])
 def account_info(API_KEY):
-    if API_KEY_VERIFY(API_KEY) == 400:
+    if not API_KEY_VERIFY(API_KEY):
         return 400
     user = Login.query.get(request.args.get("user_id"))
     if not user:

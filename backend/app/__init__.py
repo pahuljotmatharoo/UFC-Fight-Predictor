@@ -9,8 +9,8 @@ results_cache = {} # cache for results
 def API_KEY_VERIFY(API_KEY):
     user = Login.query.get(request.args.get('user_id'))
     if user.API_KEY != API_KEY:
-        return 400
-    return None
+        return False
+    return True
 
 def create_app():
     app = Flask(__name__)

@@ -13,8 +13,27 @@ import UfcButton from './components/small-components/ufcbutton';
 import { useState } from 'react';
 //gonna add a API key per user
 function App() {
+  
   const [LoggedIn, setLoggedIn] = useState(0);
   const [API_KEY, setAPI_KEY] = useState("0");
+
+  const logOut = async () => {
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/logout/${API_KEY}?user_id=${encodeURIComponent(LoggedIn)}`, {
+        method: 'GET'
+      })
+      let data = await response.json();
+      if(response.status === 400) {
+        alert("Invalid API Key");
+      }
+      console.log(data);
+      setLoggedIn(0);
+    }
+    catch {
+      alert("Backend Server is down!");
+    }
+  }
+
   return (
     <div className='landing-page'>
     <Router>
@@ -46,7 +65,7 @@ function App() {
             </Link>
             : null}
             
-            {LoggedIn != 0 ? <UfcButton id="logout-button" click={ () => setLoggedIn(0)}>Logout</UfcButton>
+            {LoggedIn != 0 ? <UfcButton id="logout-button" click={logOut}>Logout</UfcButton>
             : null}
           </div>
 
