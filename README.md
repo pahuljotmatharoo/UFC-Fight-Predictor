@@ -14,6 +14,7 @@ A full-stack application that predicts UFC fight outcomes using a Flask-based Py
 ![account](https://github.com/user-attachments/assets/309d4024-61e7-4fc3-a51f-c6c648e200e4")
 ![changeuser](https://github.com/user-attachments/assets/acbf9327-0e39-4ccb-98c3-a43bfa89e1c9)
 ![changepass](https://github.com/user-attachments/assets/f8295433-7eb7-43f7-9c4a-5c4b9dfc6a59)
+<img width="2560" height="1399" alt="image" src="https://github.com/user-attachments/assets/b6abd5a8-6869-463b-860c-16b60d732081" />
 
 # Features
 - **Authentication:** User registration and login
