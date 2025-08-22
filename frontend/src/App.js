@@ -11,7 +11,7 @@ import UFC_logo from '../src/assets/UFC_Logo.png';
 import user_logo from '../src/assets/user.png';
 import UfcButton from './components/small-components/ufcbutton';
 import { useState } from 'react';
-//gonna add a API key per user
+
 function App() {
   
   const [LoggedIn, setLoggedIn] = useState(0);
@@ -61,12 +61,12 @@ function App() {
           </ul>
 
           <div className="navbar__user-controls">
-            {LoggedIn != 0 ? <Link to="/account_info">
+            {LoggedIn !== 0 ? <Link to="/account_info">
             <img src={user_logo} alt="User Avatar" className="user" />
             </Link>
             : null}
             
-            {LoggedIn != 0 ? <UfcButton id="logout-button" click={logOut}>Logout</UfcButton>
+            {LoggedIn !== 0 ? <UfcButton id="logout-button" click={logOut}>Logout</UfcButton>
             : null}
           </div>
 

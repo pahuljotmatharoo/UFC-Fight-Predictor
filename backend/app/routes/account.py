@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify
-
-from .. import API_KEY_VERIFY, results_cache, API_KEY_VERIFY_WITH_USER
+from .. import API_KEY_VERIFY, results_cache, API_KEY_VERIFY_WITH_USER, encrypt
 from ..database import db
 from ..models import Login, Predictions
 
@@ -46,8 +45,8 @@ def change_user(API_KEY):
 @account_bp.route('/account/change_password/<API_KEY>', methods=['PATCH'])
 def change_password(API_KEY):
     username  = request.form['username']
-    old_pw    = request.form['old_password']
-    new_pw    = request.form['new_password']
+    old_pw    = encrypt(request.form['old_password'])
+    new_pw    = encrypt(request.form['new_password'])
     user = Login.query.get(request.args.get('user_id'))
     if not API_KEY_VERIFY_WITH_USER(API_KEY, user):
         return 404
@@ -65,7 +64,7 @@ def account_info(API_KEY):
         return 404
     if not user:
         return jsonify(), 404
-
+    user.password = encrypt(user.password)
     return jsonify({
         "AccountID": user.ID,
         "Username":  user.username,

@@ -1,4 +1,6 @@
 from flask import Blueprint, request, jsonify
+
+from .. import encrypt
 from ..database import db
 from ..models import Login
 import random
@@ -18,7 +20,7 @@ def generate_random_string(length):
 def login():
     user = request.form.get('username')
     password = request.form.get('password')
-
+    password = encrypt(password)
     data = Login.query.filter_by(username=user).first()
     if not data:
         return jsonify(), 404
@@ -41,6 +43,7 @@ def register():
 
     if Login.query.filter_by(username=user).first():
         return jsonify(), 302
+    password = encrypt(password)
     new_user = Login(username=user, password=password, API_KEY = api_key)
     db.session.add(new_user)
     db.session.commit()
