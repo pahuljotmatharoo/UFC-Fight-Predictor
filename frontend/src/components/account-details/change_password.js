@@ -5,18 +5,19 @@ import UFC_logo from '../../assets/UFC_Logo.png'
 import './account_details.css'
 import { useNavigate } from 'react-router-dom';
 
-const change_acc = async (username, password, new_password, LoggedIn, navigate) => {
+const change_acc = async (username, password, new_password, LoggedIn, navigate, API_KEY) => {
     const formBody = new URLSearchParams({
                 username: username.current.value,
                 new_password: new_password.current.value,
                 old_password: password.current.value
             }).toString();
+            
     if(new_password.current.value.length < 5) {
         alert("New Username needs to be longer than 5 characters!");
         return;
     }
     try {
-        const response = await fetch(`http://127.0.0.1:5000/account/change_password/${LoggedIn}`, {
+        const response = await fetch(`http://127.0.0.1:5000/account/change_password/${API_KEY}?user_id=${encodeURIComponent(LoggedIn)}`, {
             method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded' 
@@ -37,7 +38,7 @@ const change_acc = async (username, password, new_password, LoggedIn, navigate) 
     }
 }
 
-export default function Change_password({LoggedIn}) {
+export default function Change_password({LoggedIn, API_KEY}) {
     let navigate = useNavigate();
     let username_in = useRef();
     let new_password_in = useRef();
@@ -50,7 +51,7 @@ export default function Change_password({LoggedIn}) {
             <Username ref={username_in} placeholder='Username'></Username>
             <Password ref={password_in}></Password>
             <Password keyname="confirm" ref={new_password_in} placeholder='New Password'></Password>
-            <Submit onClick={() => change_acc(username_in, password_in, new_password_in, LoggedIn, navigate)}></Submit>
+            <Submit onClick={() => change_acc(username_in, password_in, new_password_in, LoggedIn, navigate, API_KEY)}></Submit>
             <Logo>
                 <img src={UFC_logo} alt="My Logo" height={20} />
             </Logo>

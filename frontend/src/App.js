@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 import Login_page from './components/auth/Login';
 import Register_page from './components/auth/register';
 import Predictor from './components/predictor/predictor';
@@ -17,6 +17,7 @@ function App() {
   const [LoggedIn, setLoggedIn] = useState(0);
   const [API_KEY, setAPI_KEY] = useState("0");
 
+  //logout function, async as we need to await for fetch and response
   const logOut = async () => {
     try {
       const response = await fetch(`http://127.0.0.1:5000/logout/${API_KEY}?user_id=${encodeURIComponent(LoggedIn)}`, {
@@ -77,8 +78,8 @@ function App() {
         <Route path="/predictor" element={<Predictor LoggedIn={LoggedIn} API_KEY={API_KEY} />} />
         <Route path="/results" element={<Results LoggedIn={LoggedIn} API_KEY={API_KEY} />} />
         <Route path="/account_info" element={<Account_info LoggedIn={LoggedIn} API_KEY={API_KEY} setLoggedIn={setLoggedIn}/>} />
-        <Route path="/change_username" element={<Change_username LoggedIn={LoggedIn}/>}/>
-        <Route path="/change_password" element={<Change_password LoggedIn={LoggedIn}/>}/>
+        <Route path="/change_username" element={<Change_username LoggedIn={LoggedIn} API_KEY={API_KEY}/>}/>
+        <Route path="/change_password" element={<Change_password LoggedIn={LoggedIn} API_KEY={API_KEY}/>}/>
       </Routes>
     </Router>
     </div>

@@ -11,11 +11,11 @@ export default function Results({LoggedIn, API_KEY}) {
   console.log(LoggedIn);
 
   useEffect(() => {
-    if(LoggedIn === 0 && !load) {
-    alert("Not Logged in!");
-    load = true;
-    navigate("/");
-    }}
+      if(LoggedIn === 0 && !load) {
+        alert("Not Logged in!");
+        load = true;
+        navigate("/");
+      }}
   ) 
 
   const [Data, setData] = useState([]);

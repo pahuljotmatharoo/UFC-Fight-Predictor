@@ -12,6 +12,11 @@ def API_KEY_VERIFY(API_KEY):
         return False
     return True
 
+def API_KEY_VERIFY_WITH_USER(API_KEY, user):
+    if user.API_KEY != API_KEY:
+        return False
+    return True
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)

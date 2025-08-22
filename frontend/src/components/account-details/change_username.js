@@ -5,18 +5,19 @@ import UFC_logo from '../../assets/UFC_Logo.png'
 import './account_details.css'
 import { useNavigate } from 'react-router-dom';
 
-const change_acc = async (username, password, new_username, LoggedIn, navigate) => {
+const change_acc = async (username, password, new_username, LoggedIn, navigate, API_KEY) => {
     const formBody = new URLSearchParams({
                 old_username: username.current.value,
                 new_username: new_username.current.value,
                 old_password: password.current.value
             }).toString();
+            
     if(new_username.current.value.length < 5) {
         alert("New Username needs to be longer than 5 characters!");
         return;
     }
     try {
-        const response = await fetch(`http://127.0.0.1:5000/account/change_user/${LoggedIn.LoggedIn}`, {
+        const response = await fetch(`http://127.0.0.1:5000/account/change_user/${API_KEY}?user_id=${encodeURIComponent(LoggedIn)}`, {
             method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded' 
@@ -37,7 +38,7 @@ const change_acc = async (username, password, new_username, LoggedIn, navigate) 
     }
 }
 
-export default function Change_username(LoggedIn) {
+export default function Change_username({LoggedIn, API_KEY}) {
     let navigate = useNavigate();
     let username_in = useRef();
     let new_username_in = useRef();
@@ -50,7 +51,7 @@ export default function Change_username(LoggedIn) {
                  <Username ref={username_in} placeholder='Old Username'></Username>
                  <Username keyname="confirm" ref={new_username_in} placeholder='New Username'></Username>
                  <Password ref={password_in}></Password>
-                 <Submit onClick={() => change_acc(username_in, password_in, new_username_in, LoggedIn, navigate)}></Submit>
+                 <Submit onClick={() => change_acc(username_in, password_in, new_username_in, LoggedIn, navigate, API_KEY)}></Submit>
                  <Logo>
                     <img src={UFC_logo} alt="My Logo" height={20} />
                  </Logo>
