@@ -10,19 +10,18 @@ export default function Login_page({setLoggedIn, setAPI_KEY}) {
     const navigate = useNavigate();
 
     const click = async() => {
-          // Build the x-www-form-urlencoded body
-        const formBody = new URLSearchParams({
+        const body = {
             username: username.current.value,
             password: password.current.value,
-        }).toString();
+        };
 
         try {
             const response = await fetch('http://127.0.0.1:5000/login', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded' 
+                'Content-Type': 'application/json'
             },
-            body: formBody
+            body: JSON.stringify(body)
             });
             
             var data = await response.json();

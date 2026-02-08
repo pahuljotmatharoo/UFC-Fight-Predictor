@@ -6,19 +6,19 @@ import { useNavigate } from 'react-router-dom';
 
 const click = async(username, password, password_conf, navigate) => {
         // Build the x-www-form-urlencoded body
-    const formBody = new URLSearchParams({
+    const formBody = {
         username: username.current.value,
         password: password.current.value,
         confirmpassword: password_conf.current.value,
-    }).toString(); // "username=alice&password=secret"
+    }; // "username=alice&password=secret"
 
     try {
         const response = await fetch('http://127.0.0.1:5000/register', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded' 
+            'Content-Type': 'application/json'
         },
-        body: formBody
+        body: JSON.stringify(formBody)
         });
         console.log(response);
         if(response.status === 200) {
