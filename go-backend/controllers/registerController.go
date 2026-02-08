@@ -14,16 +14,16 @@ func RegisterUser(db *sql.DB) gin.HandlerFunc {
 		var req database.Login
 
 		if !services.ValidateLoginRequestBodyService(&req, c) {
-			c.IndentedJSON(http.StatusUnauthorized, gin.H{"error": "Invalid Credentials"})
+			c.IndentedJSON(http.StatusUnauthorized, gin.H{})
 			return
 		}
 
 		if !services.RegisterUserService(db, &req) {
-			c.IndentedJSON(http.StatusBadRequest, gin.H{"error": "Invalid Credentials"})
+			c.IndentedJSON(http.StatusBadRequest, gin.H{})
 			return
 		}
 
-		c.IndentedJSON(http.StatusOK, gin.H{"success": "Register Successful"})
+		c.IndentedJSON(http.StatusOK, gin.H{})
 
 	}
 }

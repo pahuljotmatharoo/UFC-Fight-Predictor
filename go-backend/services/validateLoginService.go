@@ -11,21 +11,22 @@ import (
 //basically use row.Next to loop through the rows, row.scan to assign a columns to variables
 //needs to be called before accessing first data
 
-func ValidateLoginService(db *sql.DB, info *database.Login) bool {
-	rows, errors := db.Query("SELECT password FROM login WHERE username = ?", info.Username)
+func ValidateLoginService(db *sql.DB, info *database.Login) (bool, int, string) {
+	rows, errors := db.Query("SELECT password, id, API_KEY FROM login_info WHERE username = ?", info.Username)
 	if errors != nil {
-		return false
+		return true, 0, ""
 	}
-	// fmt.Print(errors)
 	var password_db string
+	var id_db int
+	var API_KEY string
 	if rows.Next() {
-		error := rows.Scan(&password_db)
+		error := rows.Scan(&password_db, &id_db, &API_KEY)
 		if error != nil {
-			return false
+			return false, 0, ""
 		}
-		return password_db == info.Password
+		return !(password_db == info.Password), id_db, API_KEY
 	} else {
-		return false
+		return true, 0, ""
 	}
 }
 

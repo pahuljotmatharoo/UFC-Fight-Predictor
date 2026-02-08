@@ -14,18 +14,18 @@ func ValidateLogin(db *sql.DB) gin.HandlerFunc {
 		var req database.Login
 
 		if !services.ValidateLoginRequestBodyService(&req, c) {
-			c.IndentedJSON(http.StatusBadRequest, gin.H{"error": "Invalid Credentials"})
+			c.IndentedJSON(http.StatusBadRequest, gin.H{})
 			return
 		}
-
-		if !services.ValidateLoginService(db, &req) {
-			c.IndentedJSON(http.StatusBadRequest, gin.H{"error": "Invalid Credentials"})
+		err, id, api_key := services.ValidateLoginService(db, &req)
+		if err {
+			c.IndentedJSON(http.StatusUnauthorized, gin.H{})
 			return
 		}
 
 		c.IndentedJSON(http.StatusOK, gin.H{
-			"accountID": accountID,
-			"API_KEY":   apiKey,
+			"accountID": id,
+			"API_KEY":   api_key,
 		})
 
 	}

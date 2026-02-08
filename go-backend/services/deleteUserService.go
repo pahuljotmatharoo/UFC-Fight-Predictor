@@ -2,16 +2,32 @@ package services
 
 import (
 	"database/sql"
-	"fmt"
-	"ufcfightpredictor/backend/database"
 )
 
-func DeleteUserService(db *sql.DB, info *database.Login) bool {
-	login_verification := ValidateLoginService(db, info)
-	if !login_verification {
+func validateAPIKEY(rows *sql.Rows, API_KEY *string) bool {
+	rows.Next()
+	var API_KEY_FOUND string
+	error := rows.Scan(&API_KEY_FOUND)
+	if error != nil {
 		return false
 	}
-	_, err := db.Exec("DELETE FROM login WHERE username = ?", info.Username)
-	fmt.Print(err)
+	if API_KEY_FOUND != *API_KEY {
+		return false
+	} else {
+		return true
+	}
+}
+
+func DeleteUserService(db *sql.DB, userID *string, API_KEY *string) bool {
+	rows, errors := db.Query("SELECT API_KEY FROM login_info WHERE id = ?", userID)
+	if errors == nil {
+		if !validateAPIKEY(rows, API_KEY) {
+			return false
+		}
+	} else {
+		return false
+	}
+
+	_, err := db.Exec("DELETE FROM login_info WHERE id = ?", *userID)
 	return err == nil
 }

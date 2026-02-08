@@ -3,7 +3,6 @@ package controllers
 import (
 	"database/sql"
 	"net/http"
-	"ufcfightpredictor/backend/database"
 	"ufcfightpredictor/backend/services"
 
 	"github.com/gin-gonic/gin"
@@ -11,18 +10,15 @@ import (
 
 func DeleteUser(db *sql.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		var req database.Login
 
-		if !services.ValidateLoginRequestBodyService(&req, c) {
-			return
-		}
+		API_KEY := c.Param("API_KEY")
+		userID := c.Query("user_id")
 
-		if !services.DeleteUserService(db, &req) {
+		if !services.DeleteUserService(db, &userID, &API_KEY) {
 			c.IndentedJSON(http.StatusBadRequest, gin.H{"error": "Invalid Credentials"})
-			return
+		} else {
+			c.IndentedJSON(http.StatusOK, gin.H{"success": "Delete Successful"})
 		}
-
-		c.IndentedJSON(http.StatusOK, gin.H{"success": "Delete Successful"})
 
 	}
 }
