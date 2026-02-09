@@ -15,6 +15,12 @@ type Login struct {
 	Api_key  string `json:"API_KEY"`
 }
 
+type UpdatePassword struct {
+	Username    string `json:"username"`
+	OldPassword string `json:"old_password"`
+	NewPassword string `json:"new_password"`
+}
+
 func InitDataBase() *sql.DB {
 	var db *sql.DB
 	cfg := mysql.NewConfig()

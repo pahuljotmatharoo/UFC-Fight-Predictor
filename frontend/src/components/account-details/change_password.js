@@ -6,11 +6,11 @@ import './account_details.css'
 import { useNavigate } from 'react-router-dom';
 
 const change_acc = async (username, password, new_password, LoggedIn, navigate, API_KEY) => {
-    const formBody = new URLSearchParams({
+    const formBody = {
                 username: username.current.value,
                 new_password: new_password.current.value,
                 old_password: password.current.value
-            }).toString();
+            };
             
     if(new_password.current.value.length < 5) {
         alert("New Username needs to be longer than 5 characters!");
@@ -20,9 +20,9 @@ const change_acc = async (username, password, new_password, LoggedIn, navigate, 
         const response = await fetch(`http://127.0.0.1:5000/account/change_password/${API_KEY}?user_id=${encodeURIComponent(LoggedIn)}`, {
             method: 'PATCH',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded' 
+                    'Content-Type': 'application/json'
                 },
-                body: formBody
+                body: JSON.stringify(formBody)
         })
         if(response.status === 200) {
             alert("Password changed successfully!");

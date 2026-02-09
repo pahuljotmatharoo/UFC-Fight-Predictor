@@ -9,24 +9,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func ValidateLogin(db *sql.DB) gin.HandlerFunc {
+func UpdatePassword(db *sql.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		var req database.Login
-
+		var req database.UpdatePassword
+		API_KEY := c.Param("API_KEY")
+		userID := c.Query("user_id")
 		if !services.ValidateRequestBody(&req, c) {
 			c.IndentedJSON(http.StatusBadRequest, gin.H{})
 			return
 		}
-		err, id, api_key := services.ValidateLogin(db, &req)
-		if err {
-			c.IndentedJSON(http.StatusUnauthorized, gin.H{})
+		if !services.UpdatePassword(&API_KEY, db, &userID, &req) {
+			c.IndentedJSON(http.StatusBadRequest, gin.H{})
 			return
 		}
-
-		c.IndentedJSON(http.StatusOK, gin.H{
-			"accountID": id,
-			"API_KEY":   api_key,
-		})
-
+		c.IndentedJSON(http.StatusOK, gin.H{})
 	}
 }

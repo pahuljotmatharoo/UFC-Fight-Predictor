@@ -13,12 +13,12 @@ func RegisterUser(db *sql.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var req database.Login
 
-		if !services.ValidateLoginRequestBodyService(&req, c) {
+		if !services.ValidateRequestBody(&req, c) {
 			c.IndentedJSON(http.StatusUnauthorized, gin.H{})
 			return
 		}
 
-		if !services.RegisterUserService(db, &req) {
+		if !services.RegisterUser(db, &req) {
 			c.IndentedJSON(http.StatusBadRequest, gin.H{})
 			return
 		}
