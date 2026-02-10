@@ -3,7 +3,7 @@ package controllers
 import (
 	"database/sql"
 	"net/http"
-	"ufcfightpredictor/backend/services"
+	servicesAccount "ufcfightpredictor/backend/services/account"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,7 +14,7 @@ func GetAccountInfo(db *sql.DB) gin.HandlerFunc {
 		API_KEY := c.Param("API_KEY")
 		userID := c.Query("user_id")
 
-		success, login := services.GetAccount(db, &userID, &API_KEY)
+		success, login := servicesAccount.GetAccount(db, &userID, &API_KEY)
 
 		if !success {
 			c.IndentedJSON(http.StatusBadRequest, gin.H{})

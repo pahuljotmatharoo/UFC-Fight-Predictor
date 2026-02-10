@@ -4,7 +4,8 @@ import (
 	"database/sql"
 	"net/http"
 	"ufcfightpredictor/backend/database"
-	"ufcfightpredictor/backend/services"
+	servicesAccount "ufcfightpredictor/backend/services/account"
+	servicesGeneral "ufcfightpredictor/backend/services/general"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,11 +15,11 @@ func UpdateUsername(db *sql.DB) gin.HandlerFunc {
 		var req database.UpdateUsername
 		API_KEY := c.Param("API_KEY")
 		userID := c.Query("user_id")
-		if !services.ValidateRequestBody(&req, c) {
+		if !servicesGeneral.ValidateRequestBody(&req, c) {
 			c.IndentedJSON(http.StatusBadRequest, gin.H{})
 			return
 		}
-		if !services.UpdateUsername(&API_KEY, db, &userID, &req) {
+		if !servicesAccount.UpdateUsername(&API_KEY, db, &userID, &req) {
 			c.IndentedJSON(http.StatusBadRequest, gin.H{})
 			return
 		}

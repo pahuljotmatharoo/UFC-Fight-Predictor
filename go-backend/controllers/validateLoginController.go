@@ -4,7 +4,8 @@ import (
 	"database/sql"
 	"net/http"
 	"ufcfightpredictor/backend/database"
-	"ufcfightpredictor/backend/services"
+	servicesAccount "ufcfightpredictor/backend/services/account"
+	servicesGeneral "ufcfightpredictor/backend/services/general"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,11 +14,11 @@ func ValidateLogin(db *sql.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var req database.Login
 
-		if !services.ValidateRequestBody(&req, c) {
+		if !servicesGeneral.ValidateRequestBody(&req, c) {
 			c.IndentedJSON(http.StatusBadRequest, gin.H{})
 			return
 		}
-		err, id, api_key := services.ValidateLogin(db, &req)
+		err, id, api_key := servicesAccount.ValidateLogin(db, &req)
 		if err {
 			c.IndentedJSON(http.StatusUnauthorized, gin.H{})
 			return

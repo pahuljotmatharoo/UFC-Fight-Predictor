@@ -1,12 +1,13 @@
-package services
+package servicesAccount
 
 import (
 	"database/sql"
 	"ufcfightpredictor/backend/database"
+	servicesGeneral "ufcfightpredictor/backend/services/general"
 )
 
 func GetAccount(db *sql.DB, userID *string, API_KEY *string) (bool, database.Login) {
-	if !validateAPIKEY(API_KEY, db, userID) {
+	if !servicesGeneral.ValidateAPIKEY(API_KEY, db, userID) {
 		return false, database.Login{}
 	}
 

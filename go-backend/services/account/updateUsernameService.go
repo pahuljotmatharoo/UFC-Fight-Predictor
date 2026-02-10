@@ -1,12 +1,13 @@
-package services
+package servicesAccount
 
 import (
 	"database/sql"
 	"ufcfightpredictor/backend/database"
+	servicesGeneral "ufcfightpredictor/backend/services/general"
 )
 
 func UpdateUsername(API_KEY *string, db *sql.DB, userID *string, req *database.UpdateUsername) bool {
-	if !validateAPIKEY(API_KEY, db, userID) {
+	if !servicesGeneral.ValidateAPIKEY(API_KEY, db, userID) {
 		return false
 	}
 	info := database.Login{Username: req.OldUsername, Password: req.Password, Api_key: *API_KEY}

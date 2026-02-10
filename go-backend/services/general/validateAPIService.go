@@ -1,10 +1,10 @@
-package services
+package servicesGeneral
 
 import (
 	"database/sql"
 )
 
-func validateAPIKEY(API_KEY *string, db *sql.DB, userID *string) bool {
+func ValidateAPIKEY(API_KEY *string, db *sql.DB, userID *string) bool {
 	rows, errors := db.Query("SELECT API_KEY FROM login_info WHERE id = ?", userID)
 	if errors != nil {
 		return false
