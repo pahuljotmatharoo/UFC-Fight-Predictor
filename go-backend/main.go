@@ -15,6 +15,7 @@ import (
 func main() {
 	godotenv.Load()
 	router := gin.Default()
+	// setup cors to actually allow requests to backend server
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://" + os.Getenv("FRONTEND_URL"), "http://" + os.Getenv("BACKEND_URL")},
 		AllowMethods:     []string{"GET", "POST", "PATCH", "OPTIONS", "DELETE"},

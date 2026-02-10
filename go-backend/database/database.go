@@ -21,6 +21,12 @@ type UpdatePassword struct {
 	NewPassword string `json:"new_password"`
 }
 
+type UpdateUsername struct {
+	OldUsername string `json:"old_username"`
+	NewUsername string `json:"new_username"`
+	Password    string `json:"password"`
+}
+
 func InitDataBase() *sql.DB {
 	var db *sql.DB
 	cfg := mysql.NewConfig()
