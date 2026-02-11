@@ -27,6 +27,16 @@ type UpdateUsername struct {
 	Password    string `json:"password"`
 }
 
+type UFC_HISTORY struct {
+	ID          int     `json:"ID"`
+	AccountID   int     `json:"AccountID"`
+	Fighter1    string  `json:"Fighter1"`
+	Fighter2    string  `json:"Fighter2"`
+	Percentage1 float32 `json:"Percentage1"`
+	Percentage2 float32 `json:"Percentage2"`
+	Winnter     string  `json:"Winner"`
+}
+
 func InitDataBase() *sql.DB {
 	var db *sql.DB
 	cfg := mysql.NewConfig()

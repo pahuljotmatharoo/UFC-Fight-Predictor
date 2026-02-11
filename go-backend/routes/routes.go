@@ -14,4 +14,5 @@ func DefineEndpoints(router *gin.Engine, db *sql.DB) {
 	router.PATCH("account/change_password/:API_KEY", controllers.UpdatePassword(db))
 	router.PATCH("account/change_user/:API_KEY", controllers.UpdateUsername(db))
 	router.GET("account/:API_KEY", controllers.GetAccountInfo(db))
+	router.GET("results/:API_KEY")
 }
