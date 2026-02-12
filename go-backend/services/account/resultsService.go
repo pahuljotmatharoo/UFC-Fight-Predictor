@@ -10,17 +10,19 @@ func Results(db *sql.DB, userID *string, API_KEY *string) (bool, []database.UFC_
 	if !servicesGeneral.ValidateAPIKEY(API_KEY, db, userID) {
 		return false, []database.UFC_HISTORY{}
 	}
-	var count int
-	rows, errors := db.Query("SELECT * FROM UFC_HISTORY WHERE AccountID = ?", *userID).Scan(&count)
-	var result []database.UFC_HISTORY = make(database.UFC_HISTORY, count) // make
+	rows, errors := db.Query("SELECT * FROM UFC_HISTORY WHERE AccountID = ?", *userID)
+	var result []database.UFC_HISTORY
 	if errors != nil {
 		return false, []database.UFC_HISTORY{}
 	}
-	if rows.Next() {
-		error := rows.Scan(&result.ID, &result.AccountID, &result.Fighter1, &result.Fighter2)
+	for i := 0; rows.Next(); {
+		var row database.UFC_HISTORY
+		error := rows.Scan(&row.ID, &row.AccountID, &row.Fighter1, &row.Fighter2)
 		if error != nil {
 			return false, []database.UFC_HISTORY{}
 		}
-		return true, result
+		result = append(result, row)
+		i++
 	}
+	return true, result
 }
