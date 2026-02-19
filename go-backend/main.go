@@ -24,6 +24,7 @@ func main() {
 		MaxAge:           12 * time.Hour,
 	}))
 	db := database.InitDataBase()
-	routes.DefineEndpoints(router, db)
+	reader, _ := database.InitFightersList()
+	routes.DefineEndpoints(router, db, reader)
 	router.Run(os.Getenv("BACKEND_URL"))
 }

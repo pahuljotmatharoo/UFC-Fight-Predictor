@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"encoding/csv"
 	"fmt"
 	"log"
 	"os"
@@ -35,6 +36,16 @@ type UFC_HISTORY struct {
 	Percentage1 float32 `json:"Percentage1"`
 	Percentage2 float32 `json:"Percentage2"`
 	Winnter     string  `json:"Winner"`
+}
+
+func InitFightersList() (*csv.Reader, error) {
+	file, err := os.Open("ufc_master_data.csv")
+	if err != nil {
+		return nil, err
+	}
+
+	reader := csv.NewReader(file)
+	return reader, nil
 }
 
 func InitDataBase() *sql.DB {
