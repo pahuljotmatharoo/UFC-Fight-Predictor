@@ -1,5 +1,5 @@
 # UFC Fight Predictor
-A full-stack application that predicts UFC fight outcomes using a Flask-based Python backend and a React frontend.
+A full-stack application that predicts UFC fight outcomes using a Go-based backend and a React frontend.
 
 ![login](https://github.com/user-attachments/assets/6a6218d1-fead-41f0-8940-a21cc0b00b1e)
 ![register](https://github.com/user-attachments/assets/14aad096-5aa7-4539-a8e9-77d495b455b9)
