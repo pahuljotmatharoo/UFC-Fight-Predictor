@@ -27,7 +27,7 @@ A full-stack application that predicts UFC fight outcomes using a Go-based backe
 - **Account Management:** Change username, change password, delete account
 
 # Tech Stack
-- **Backend:** Flask · SQLAlchemy · pyodbc · pandas · scikit-learn
+- **Backend:** Gin · SQLAlchemy · pyodbc · pandas · scikit-learn
 
 - **Frontend:** React · React Router
 
